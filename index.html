@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Business Name - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Business Name!</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <p>We provide amazing products/services. Learn more below!</p>
+        </section>
+
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="product1.jpg" alt="Product 1">
+                    <h3>Product Title 1</h3>
+                    <p>A brief description of Product 1. Click to inquire!</p>
+                    <a href="#contact" class="buy-button">Inquire About Product 1</a>
+                </div>
+                <div class="product-item">
+                    <img src="product2.jpg" alt="Product 2">
+                    <h3>Product Title 2</h3>
+                    <p>A brief description of Product 2. Click to inquire!</p>
+                    <a href="#contact" class="buy-button">Inquire About Product 2</a>
+                </div>
+                <!-- Add more product items as needed -->
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Please fill out the form below, and we'll get back to you shortly!</p>
+
+            <!-- This is where your form will go -->
+            <!-- OPTION A: Netlify Form (If hosting on Netlify) -->
+            <form name="contact" method="POST" data-netlify="true">
+                <p>
+                    <label for="name">Your Name:</label><br>
+                    <input type="text" id="name" name="name" required>
+                </p>
+                <p>
+                    <label for="phone">Your Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" required>
+                </p>
+                <p>
+                    <label for="product-interest">Product of Interest (Optional):</label><br>
+                    <input type="text" id="product-interest" name="product-interest">
+                </p>
+                <p>
+                    <label for="message">Your Message (Optional):</label><br>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                </p>
+                <p>
+                    <button type="submit">Send Inquiry</button>
+                </p>
+            </form>
+
+            <!-- OPTION B: Google Form (If not using Netlify Forms or prefer Google) -->
+            <!--
+            <iframe src="YOUR_GOOGLE_FORM_EMBED_CODE_HERE" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+            -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Business Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
