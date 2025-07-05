@@ -1,123 +1,334 @@
-/* RESPONSIVE ADJUSTMENTS - ADD/MODIFY THESE STYLES */
-@media (max-width: 768px) {
-    /* Header & Navigation */
-    header h1 {
-        font-size: 1.8em; /* Slightly smaller on mobile */
-    }
-    nav {
-        display: flex; /* Make nav items flexible */
-        flex-direction: column; /* Stack them vertically */
-        align-items: center; /* Center them */
-        padding: 0 10px; /* Add some side padding */
-    }
-    nav a {
-        margin: 8px 0; /* More vertical space between links */
-        font-size: 0.95em; /* Slightly smaller font */
-    }
-
-    /* Main Content Area */
-    main {
-        margin: 10px auto; /* Less vertical margin on mobile */
-        padding: 15px; /* Less internal padding */
-    }
-
-    /* Hero Section */
-    #hero {
-        padding: 30px 10px; /* Adjust padding */
-    }
-    #hero p {
-        font-size: 1em; /* Ensure text is not too large */
-        padding: 0 10px; /* Add some horizontal padding for text */
-    }
-    .button {
-        padding: 10px 20px; /* Slightly smaller buttons */
-        font-size: 0.9em;
-    }
-
-    /* Product Grid (Homepage) */
-    .product-grid {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
-        gap: 20px; /* Reduce gap between stacked items */
-    }
-    .product-item {
-        padding: 15px; /* Adjust padding */
-    }
-    .product-item img {
-        height: 180px; /* Slightly smaller image height */
-    }
-    .product-item h3 {
-        font-size: 1.6em; /* Adjust font size */
-    }
-    .product-item p {
-        font-size: 0.9em; /* Adjust font size */
-    }
-
-
-    /* Product Detail Page */
-    .product-detail {
-        flex-direction: column; /* Ensure elements stack */
-        padding: 20px; /* Adjust padding */
-        gap: 20px; /* Reduce gap between elements */
-    }
-    .product-detail img {
-        max-height: 250px; /* Smaller max height for main product image */
-    }
-    .product-detail h2 {
-        font-size: 2.2em; /* Adjust main title font size */
-        word-break: break-word; /* Prevents long words from overflowing */
-        padding: 0 10px;
-    }
-    .product-detail .price-placeholder {
-        font-size: 1.2em; /* Smaller price text */
-    }
-    .product-detail p {
-        font-size: 1em; /* Ensure readability */
-        padding: 0 10px;
-    }
-    .product-detail ul {
-        width: calc(100% - 20px); /* Give list items some side padding */
-        padding: 0 10px;
-    }
-    .product-detail ul li {
-        padding: 8px 12px; /* Smaller padding for list items */
-        font-size: 0.95em;
-    }
-
-    /* Form Styles */
-    form {
-        padding: 15px; /* Reduce form padding */
-    }
-    form input[type="text"],
-    form input[type="tel"],
-    form textarea {
-        width: calc(100% - 20px); /* Adjust for padding within narrower forms */
-        font-size: 0.95em; /* Smaller font size */
-    }
-    form button[type="submit"] {
-        padding: 10px 20px; /* Smaller submit button */
-        font-size: 1em;
-    }
-
-    /* Footer */
-    footer {
-        padding: 15px; /* Smaller footer padding */
-        font-size: 0.9em;
-    }
+/* KEYFRAMES FOR FADE-IN ANIMATION */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Optional: Additional breakpoint for very small phones (e.g., iPhone 5/SE) */
-@media (max-width: 480px) {
+/* PARTICLES.JS CONTAINER STYLES */
+#particles-js {
+    position: fixed; /* Fixes it to the viewport */
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a2e; /* Your body background color - should match for seamless transition */
+    background-image: url(''); /* No specific background image for particles by default */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    z-index: -1; /* Puts it behind all other content */
+}
+
+/* GENERAL BODY & LAYOUT STYLES */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a2e; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    line-height: 1.6;
+
+    /* NEW: Global Fade-in animation for the whole page */
+    animation: fadeIn 1s ease-out forwards;
+
+    position: relative; /* Ensure body establishes a stacking context for z-index */
+    z-index: 0; /* Ensures body content appears above particles */
+}
+
+header, main, footer {
+    position: relative; /* Ensure these sections are above the particles */
+    z-index: 1; /* Higher z-index than particles */
+}
+
+header {
+    background-color: #0f0f2b; /* Even darker header */
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #a0a0ff; /* Accent color for links */
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+/* GENERAL BUTTON STYLES */
+.button {
+    display: inline-block;
+    background-color: #6a0571; /* Purple button */
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.button:hover {
+    background-color: #8c0792;
+    transform: translateY(-2px); /* Makes it lift slightly */
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #1e1e3b; /* Slightly lighter dark background for main content */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2, h3 {
+    color: #e0e0e0;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* HERO SECTION SPECIFIC STYLES */
+#hero {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #2a2a4a; /* Background for the hero content area */
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+#hero p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+
+/* PRODUCT GRID LAYOUT */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* INDIVIDUAL PRODUCT ITEM STYLES (ON HOMEPAGE) */
+.product-item {
+    background-color: #2a2a4a;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.product-item:hover {
+    transform: translateY(-5px); /* Makes it lift slightly */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Slightly stronger shadow */
+}
+
+.product-item img {
+    max-width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover ensures image fills the space */
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+}
+
+.product-item h3 {
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.product-item p {
+    font-size: 1em;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+/* PRODUCT DETAIL PAGE SPECIFIC STYLES */
+.product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 30px;
+    background-color: #2a2a4a;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.product-detail img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.product-detail h2 {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.product-detail .price-placeholder {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #a0a0ff;
+    margin-bottom: 20px;
+}
+
+.product-detail p {
+    font-size: 1.1em;
+    max-width: 800px;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.product-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left; /* Align list items left */
+    max-width: 600px;
+    width: 100%;
+}
+
+.product-detail ul li {
+    background-color: #3b3b6b;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.product-detail ul li::before {
+    content: '✅'; /* Checkmark icon */
+    margin-right: 10px;
+}
+
+/* FORM STYLES (for product detail page forms) */
+form {
+    max-width: 500px;
+    width: 100%;
+    margin: 30px auto; /* Centered and space above */
+    padding: 25px;
+    background-color: #1e1e3b;
+    border: 1px solid #444;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+form h3 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form textarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #3b3b6b;
+    border: 1px solid #6a0571; /* Purple border */
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+}
+
+form input[type="text"]:focus,
+form input[type="tel"]:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #a0a0ff; /* Light purple on focus */
+    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3);
+}
+
+form button[type="submit"] {
+    background-color: #008000; /* Green submit button */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block; /* Make button full width if needed, or center with margin auto */
+    margin: 0 auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #006400;
+    transform: translateY(-2px);
+}
+
+/* FOOTER STYLES */
+footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #0f0f2b;
+    color: #aaa;
+    margin-top: 40px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
     header h1 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
     nav a {
-        font-size: 0.85em;
+        margin: 0 10px;
     }
-    .button {
-        padding: 8px 15px;
-        font-size: 0.8em;
+    .product-grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+    .product-detail {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .product-detail img {
+        max-height: 300px;
     }
     .product-detail h2 {
-        font-size: 1.8em;
+        font-size: 2em;
+    }
+    form {
+        padding: 15px;
     }
 }
