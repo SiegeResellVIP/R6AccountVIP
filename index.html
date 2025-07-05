@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Particles.js container (for the animated background) -->
+    <div id="particles-js"></div>
+
     <header>
         <h1>Welcome to Siege Resell VIP!</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="#products">Our Inventory</a>
-            <!-- Maybe an actual contact page later, but for now products lead to contact forms -->
         </nav>
     </header>
 
@@ -47,7 +49,8 @@
                     <img src="product3.jpg" alt="Starter Account">
                     <h3>Beginner's Starter Account</h3>
                     <p>Great value account for new players with essential operators unlocked and a clean slate for ranking.</p>
-                    <a href="product3.html" class="button buy-button">View Details & Inquire</a>
+                    <a href="product3.html" class="button buy-button">View Details & I
+nquire</a>
                 </div>
 
                 <!-- Add more product items here by copying and pasting a product-item div -->
@@ -60,5 +63,15 @@
     <footer>
         <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
     </footer>
+
+    <!-- Scripts for particles.js - Place at the end of body -->
+    <script src="particles.min.js"></script>
+    <script>
+        /* This initializes the particles.js background */
+        /* parameters: (ID of the element to contain particles, URL of the JSON config file, callback function) */
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('particles.js loaded - callback');
+        });
+    </script>
 </body>
 </html>
