@@ -1,10 +1,10 @@
-/* KEYFRAMES FOR FADE-IN ANIMATION */
+/* KEYFRAMES FOR GLOBAL FADE-IN ANIMATION */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* PARTICLES.JS CONTAINER STYLES */
+/* PARTICLES.JS CONTAINER STYLES (for the animated background) */
 #particles-js {
     position: fixed; /* Fixes it to the viewport */
     width: 100%;
@@ -26,18 +26,20 @@ body {
     color: #e0e0e0; /* Light text */
     line-height: 1.6;
 
-    /* NEW: Global Fade-in animation for the whole page */
+    /* Global Fade-in animation for the whole page */
     animation: fadeIn 1s ease-out forwards;
 
     position: relative; /* Ensure body establishes a stacking context for z-index */
     z-index: 0; /* Ensures body content appears above particles */
 }
 
+/* Ensure header, main, and footer appear above the particles background */
 header, main, footer {
-    position: relative; /* Ensure these sections are above the particles */
-    z-index: 1; /* Higher z-index than particles */
+    position: relative;
+    z-index: 1;
 }
 
+/* HEADER STYLES */
 header {
     background-color: #0f0f2b; /* Even darker header */
     color: #fff;
@@ -52,6 +54,7 @@ header h1 {
     letter-spacing: 1px;
 }
 
+/* NAVIGATION STYLES */
 nav {
     margin-top: 10px;
 }
@@ -86,6 +89,7 @@ nav a:hover {
     transform: translateY(-2px); /* Makes it lift slightly */
 }
 
+/* MAIN CONTENT AREA STYLES */
 main {
     padding: 30px 20px;
     max-width: 1200px;
@@ -121,7 +125,59 @@ h2, h3 {
     margin: 0 auto 20px auto;
 }
 
-/* PRODUCT GRID LAYOUT */
+/* HOW IT WORKS SECTION (Removed from this version of index.html) */
+/* WHY CHOOSE US SECTION (Removed from this version of index.html) */
+
+/* FILTER CONTROLS STYLES (NEW/UPDATED) */
+.filter-controls {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: #2a2a4a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    display: flex; /* Arrange elements horizontally */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Space between filter elements */
+}
+
+.filter-controls label {
+    font-weight: bold;
+    color: #a0a0ff;
+    margin-right: 10px;
+    align-self: center; /* Vertically align with dropdowns */
+}
+
+.filter-controls select {
+    padding: 10px 30px 10px 15px; /* Added right padding for custom arrow */
+    border-radius: 5px;
+    border: 1px solid #a0a0ff; /* Lighter accent border */
+    background-color: #3b3b6b;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.filter-controls select:hover {
+    border-color: #fff; /* White border on hover */
+}
+
+.filter-controls select:focus {
+    outline: none;
+    border-color: #fff; /* White border on focus */
+    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3); /* Soft glow */
+}
+
+/* PRODUCT GRID LAYOUT (ON HOMEPAGE) */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -164,6 +220,26 @@ h2, h3 {
     font-size: 1em;
     margin-bottom: 15px;
     color: #ccc;
+}
+
+/* Account Stats on Product Cards (Homepage) - NEW STYLES */
+.account-stats {
+    margin-top: 15px;
+    margin-bottom: 15px; /* Space above button */
+    display: flex;
+    flex-wrap: wrap; /* Allow stats to wrap on small screens */
+    justify-content: center;
+    gap: 10px; /* Space between stat items */
+}
+
+.account-stats span {
+    background-color: #3b3b6b; /* Darker background for stat tags */
+    color: #a0a0ff; /* Accent color for stats */
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+    white-space: nowrap; /* Prevent breaking across lines */
 }
 
 /* PRODUCT DETAIL PAGE SPECIFIC STYLES */
@@ -309,26 +385,137 @@ footer {
 
 /* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
+    /* Header & Navigation */
     header h1 {
-        font-size: 2em;
+        font-size: 1.8em; /* Slightly smaller on mobile */
+    }
+    nav {
+        display: flex; /* Make nav items flexible */
+        flex-direction: column; /* Stack them vertically */
+        align-items: center; /* Center them */
+        padding: 0 10px; /* Add some side padding */
     }
     nav a {
-        margin: 0 10px;
+        margin: 8px 0; /* More vertical space between links */
+        font-size: 0.95em; /* Slightly smaller font */
     }
+
+    /* Main Content Area */
+    main {
+        margin: 10px auto; /* Less vertical margin on mobile */
+        padding: 15px; /* Less internal padding */
+    }
+
+    /* Hero Section */
+    #hero {
+        padding: 30px 10px; /* Adjust padding */
+    }
+    #hero p {
+        font-size: 1em; /* Ensure text is not too large */
+        padding: 0 10px; /* Add some horizontal padding for text */
+    }
+    .button {
+        padding: 10px 20px; /* Slightly smaller buttons */
+        font-size: 0.9em;
+    }
+
+    /* FILTER CONTROLS */
+    .filter-controls {
+        flex-direction: column; /* Stack controls vertically */
+        align-items: center;
+        gap: 15px;
+    }
+    .filter-controls label,
+    .filter-controls select {
+        width: 100%; /* Take full width */
+        max-width: 250px; /* Limit max width */
+        margin-right: 0;
+    }
+
+    /* Product Grid (Homepage) */
     .product-grid {
         grid-template-columns: 1fr; /* Single column on smaller screens */
+        gap: 20px; /* Reduce gap between stacked items */
     }
+    .product-item {
+        padding: 15px; /* Adjust padding */
+    }
+    .product-item img {
+        height: 180px; /* Slightly smaller image height */
+    }
+    .product-item h3 {
+        font-size: 1.6em; /* Adjust font size */
+    }
+    .product-item p {
+        font-size: 0.9em; /* Adjust font size */
+    }
+
+
+    /* Product Detail Page */
     .product-detail {
         flex-direction: column;
         padding: 20px;
+        gap: 20px;
     }
     .product-detail img {
-        max-height: 300px;
+        max-height: 250px;
     }
     .product-detail h2 {
-        font-size: 2em;
+        font-size: 2.2em;
+        word-break: break-word;
+        padding: 0 10px;
     }
+    .product-detail .price-placeholder {
+        font-size: 1.2em;
+    }
+    .product-detail p {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+    .product-detail ul {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+    }
+    .product-detail ul li {
+        padding: 8px 12px;
+        font-size: 0.95em;
+    }
+
+    /* Form Styles */
     form {
         padding: 15px;
+    }
+    form input[type="text"],
+    form input[type="tel"],
+    form textarea {
+        width: calc(100% - 20px);
+        font-size: 0.95em;
+    }
+    form button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    /* Footer */
+    footer {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Optional: Additional breakpoint for very small phones (e.g., iPhone 5/SE, smaller Androids) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+    nav a {
+        font-size: 0.85em;
+    }
+    .button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+    .product-detail h2 {
+        font-size: 1.8em;
     }
 }

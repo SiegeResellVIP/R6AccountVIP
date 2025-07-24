@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siege Resell VIP - Home</title>
+    <title>Siege Resell VIP - Premium Accounts</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Particles.js container (for the animated background) -->
+    <!-- Particles.js container for the animated background -->
     <div id="particles-js"></div>
 
     <header>
@@ -42,43 +42,71 @@
                 </select>
 
                 <label for="filter-platform">Platform:</label>
-                <select id="filter-platform">
-                    <option value="all">All Platforms</option>
+                <select id="filter-platform" multiple size="3"> <!-- ADDED multiple and size -->
                     <option value="pc">PC</option>
-                    <option value="ps">PlayStation</option>
+                    <option value="ps">PlayStation</</option>
                     <option value="xbox">Xbox</option>
                 </select>
+
+                <label for="filter-rank">Rank:</label>
+                <select id="filter-rank" multiple size="5"> <!-- NEW Rank filter -->
+                    <option value="unranked">Unranked</option>
+                    <option value="copper">Copper</option>
+                    <option value="bronze">Bronze</option>
+                    <option value="silver">Silver</option>
+                    <option value="gold">Gold</option>
+                    <option value="platinum">Platinum</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="champion">Champion</option>
+                    <option value="collector">Collector</option>
+                </select>
+                <!-- Add more multi-select filters as needed here (e.g., for specific skins, operators) -->
             </div>
 
             <div class="product-grid">
 
                 <!-- Product 1: Diamond Tier Account -->
                 <!-- Data attributes for filtering/sorting. IMPORTANT: Match these to your products' details. -->
-                <div class="product-item" data-platform="pc" data-rank-value="3" data-price-value="300">
+                <div class="product-item" data-platform="pc" data-rank="diamond" data-rank-value="6" data-price-value="300" data-kd="1.35" data-level="250">
                     <img src="product1.jpg" alt="Diamond Rank Account">
                     <h3>Diamond Tier Account</h3>
                     <p>High-level Diamond rank, exclusive skins. Competitive ready.</p>
+                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                        <span>Rank: Diamond</span>
+                        <span>Level: 250</span>
+                        <span>K/D: 1.35</span>
+                    </div>
                     <a href="product1.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Product 2: Collector's Pro League Account -->
-                <div class="product-item" data-platform="pc" data-rank-value="4" data-price-value="500">
+                <div class="product-item" data-platform="pc" data-rank="collector" data-rank-value="8" data-price-value="500" data-kd="1.10" data-level="180">
                     <img src="product2.jpg" alt="Pro League Account">
                     <h3>Collector's Pro League Account</h3>
                     <p>Rare Pro League bundles, charm sets. A true collectible.</p>
+                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                        <span>Rank: Collector</span>
+                        <span>Level: 180</span>
+                        <span>K/D: 1.10</span>
+                    </div>
                     <a href="product2.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Product 3: Beginner's Starter Account -->
-                <div class="product-item" data-platform="pc" data-rank-value="0" data-price-value="50">
+                <div class="product-item" data-platform="pc" data-rank="unranked" data-rank-value="0" data-price-value="50" data-kd="0.90" data-level="50">
                     <img src="product3.jpg" alt="Starter Account">
                     <h3>Beginner's Starter Account</h3>
                     <p>Essential operators unlocked, clean slate. Perfect for new players.</p>
+                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                        <span>Rank: Unranked</span>
+                        <span>Level: 50</span>
+                        <span>K/D: 0.90</span>
+                    </div>
                     <a href="product3.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Add more product items here by copying and pasting a product-item div -->
-                <!-- REMINDER: Update data-platform, data-rank-value, data-price-value for each new product -->
+                <!-- IMPORTANT: Remember to update data-platform, data-rank, data-rank-value, data-price-value, data-kd, data-level for each new product -->
 
             </div>
         </section>
@@ -103,48 +131,67 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const productGrid = document.querySelector('.product-grid');
-            const products = Array.from(productGrid.children); // Convert HTMLCollection to Array
+            // Create a copy of the original product items when the page loads
+            const products = Array.from(productGrid.children); 
+
             const sortBySelect = document.getElementById('sort-by');
             const filterPlatformSelect = document.getElementById('filter-platform');
+            const filterRankSelect = document.getElementById('filter-rank'); 
+
+            // Define numerical order for ranks (higher value = higher rank for sorting)
+            const rankOrderMap = {
+                "unranked": 0, "copper": 1, "bronze": 2, "silver": 3,
+                "gold": 4, "platinum": 5, "diamond": 6, "champion": 7,
+                "collector": 8 
+            };
 
             function applyFiltersAndSort() {
-                let currentProducts = [...products]; // Start with all products
+                let currentProducts = [...products]; // Start with a fresh copy of all original products for each filter/sort operation
 
-                // 1. Apply Platform Filter
-                const selectedPlatform = filterPlatformSelect.value;
-                if (selectedPlatform !== 'all') {
+                // --- 1. Apply Filters ---
+
+                // Platform Filter (multi-select)
+                const selectedPlatforms = Array.from(filterPlatformSelect.selectedOptions).map(option => option.value);
+                if (selectedPlatforms.length > 0) { // If any platforms are selected
                     currentProducts = currentProducts.filter(product =>
-                        product.dataset.platform === selectedPlatform
+                        selectedPlatforms.includes(product.dataset.platform)
                     );
                 }
 
-                // 2. Apply Sorting
+                // Rank Filter (multi-select)
+                const selectedRanks = Array.from(filterRankSelect.selectedOptions).map(option => option.value);
+                if (selectedRanks.length > 0) { // If any ranks are selected
+                    currentProducts = currentProducts.filter(product =>
+                        selectedRanks.includes(product.dataset.rank)
+                    );
+                }
+
+                // --- 2. Apply Sorting ---
                 const sortOrder = sortBySelect.value;
                 if (sortOrder !== 'default') {
                     currentProducts.sort((a, b) => {
                         if (sortOrder.includes('price')) {
-                            const priceA = parseInt(a.dataset.priceValue);
-                            const priceB = parseInt(b.dataset.priceValue);
+                            const priceA = parseFloat(a.dataset.priceValue); // Use parseFloat for decimal prices if needed
+                            const priceB = parseFloat(b.dataset.priceValue);
                             return sortOrder === 'price-asc' ? priceA - priceB : priceB - priceA;
                         } else if (sortOrder.includes('rank')) {
-                            // Define your rank order numerically. Higher value = higher rank.
-                            // Ensure data-rank-value in your HTML accurately reflects this.
-                            const rankA = parseInt(a.dataset.rankValue);
-                            const rankB = parseInt(b.dataset.rankValue);
+                            const rankA = rankOrderMap[a.dataset.rank]; // Use the numerical map for rank sorting
+                            const rankB = rankOrderMap[b.dataset.rank];
                             return sortOrder === 'rank-asc' ? rankA - rankB : rankB - rankA;
                         }
-                        return 0; // Fallback
+                        return 0; // Fallback - maintains original relative order if no specific sort condition met
                     });
                 }
 
-                // 3. Update the display
-                productGrid.innerHTML = ''; // Clear existing products
-                currentProducts.forEach(product => productGrid.appendChild(product)); // Add sorted/filtered products
+                // --- 3. Update the display ---
+                productGrid.innerHTML = ''; // Clear existing products from the grid
+                currentProducts.forEach(product => productGrid.appendChild(product)); // Add the sorted/filtered products back to the grid
             }
 
             // Event Listeners for changes on the dropdowns
             sortBySelect.addEventListener('change', applyFiltersAndSort);
             filterPlatformSelect.addEventListener('change', applyFiltersAndSort);
+            filterRankSelect.addEventListener('change', applyFiltersAndSort);
 
             // Initial call to apply any default sorting/filtering on page load
             applyFiltersAndSort();
