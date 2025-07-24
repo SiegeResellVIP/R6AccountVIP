@@ -42,7 +42,7 @@
                 </select>
 
                 <label for="filter-platform">Platform:</label>
-                <select id="filter-platform"> <!-- Single select now -->
+                <select id="filter-platform">
                     <option value="all">All Platforms</option>
                     <option value="pc">PC</option>
                     <option value="ps">PlayStation</option>
@@ -50,7 +50,7 @@
                 </select>
 
                 <label for="filter-rank">Rank:</label>
-                <select id="filter-rank"> <!-- Single select now -->
+                <select id="filter-rank">
                     <option value="all">All Ranks</option>
                     <option value="unranked">Unranked</option>
                     <option value="copper">Copper</option>
@@ -67,12 +67,11 @@
             <div class="product-grid">
 
                 <!-- Product 1: Diamond Tier Account -->
-                <!-- Data attributes for filtering/sorting. IMPORTANT: Match these to your products' details. -->
                 <div class="product-item" data-platform="pc" data-rank="diamond" data-rank-value="6" data-price-value="300" data-kd="1.35" data-level="250">
                     <img src="product1.jpg" alt="Diamond Rank Account">
                     <h3>Diamond Tier Account</h3>
                     <p class="description-short">High-level Diamond rank, exclusive skins. Competitive ready.</p>
-                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                    <div class="account-stats">
                         <span>Rank: Diamond</span>
                         <span>Level: 250</span>
                         <span>K/D: 1.35</span>
@@ -85,7 +84,7 @@
                     <img src="product2.jpg" alt="Pro League Account">
                     <h3>Collector's Pro League Account</h3>
                     <p class="description-short">Rare Pro League bundles, charm sets. A true collectible.</p>
-                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                    <div class="account-stats">
                         <span>Rank: Collector</span>
                         <span>Level: 180</span>
                         <span>K/D: 1.10</span>
@@ -98,7 +97,7 @@
                     <img src="product3.jpg" alt="Starter Account">
                     <h3>Beginner's Starter Account</h3>
                     <p class="description-short">Essential operators unlocked, clean slate. Perfect for new players.</p>
-                    <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
+                    <div class="account-stats">
                         <span>Rank: Unranked</span>
                         <span>Level: 50</span>
                         <span>K/D: 0.90</span>
@@ -109,8 +108,16 @@
                 <!-- Add more product items here by copying and pasting a product-item div -->
                 <!-- IMPORTANT: Remember to update data-platform, data-rank, data-rank-value, data-price-value, data-kd, data-level for each new product -->
 
+            </div> <!-- End of .product-grid -->
+
+            <!-- Placeholder for no-results message -->
+            <div id="no-results-message" style="display: none;">
+                <h3>No accounts found for your selected filters.</h3>
+                <p>Please adjust your filters or clear them to see all available accounts.</p>
+                <button id="clear-filters-button" class="button">Clear Filters</button>
             </div>
-        </section>
+
+        </section> <!-- End of #products section -->
 
     </main>
 
@@ -138,6 +145,8 @@
             const sortBySelect = document.getElementById('sort-by');
             const filterPlatformSelect = document.getElementById('filter-platform');
             const filterRankSelect = document.getElementById('filter-rank');
+            const noResultsMessage = document.getElementById('no-results-message');
+            const clearFiltersButton = document.getElementById('clear-filters-button');
 
             // Define numerical order for ranks (higher value = higher rank for sorting)
             const rankOrderMap = {
@@ -163,7 +172,7 @@
                 const selectedRank = filterRankSelect.value;
                 if (selectedRank !== 'all') {
                     currentProducts = currentProducts.filter(product =>
-                        product.dataset.rank === selectedRank
+                        selectedRank === product.dataset.rank
                     );
                 }
 
@@ -172,27 +181,46 @@
                 if (sortOrder !== 'default') {
                     currentProducts.sort((a, b) => {
                         if (sortOrder.includes('price')) {
-                            const priceA = parseFloat(a.dataset.priceValue); // Use parseFloat for decimal prices if needed
+                            const priceA = parseFloat(a.dataset.priceValue);
                             const priceB = parseFloat(b.dataset.priceValue);
                             return sortOrder === 'price-asc' ? priceA - priceB : priceB - priceA;
                         } else if (sortOrder.includes('rank')) {
-                            const rankA = rankOrderMap[a.dataset.rank]; // Use the numerical map for rank sorting
+                            const rankA = rankOrderMap[a.dataset.rank];
                             const rankB = rankOrderMap[b.dataset.rank];
                             return sortOrder === 'rank-asc' ? rankA - rankB : rankB - rankA;
                         }
-                        return 0; // Fallback - maintains original relative order if no specific sort condition met
+                        return 0;
                     });
                 }
 
                 // --- 3. Update the display ---
                 productGrid.innerHTML = ''; // Clear existing products from the grid
-                currentProducts.forEach(product => productGrid.appendChild(product)); // Add the sorted/filtered products back to the grid
+
+                if (currentProducts.length === 0) {
+                    // Show no-results message if no products match
+                    noResultsMessage.style.display = 'block';
+                } else {
+                    // Hide no-results message and display products
+                    noResultsMessage.style.display = 'none';
+                    currentProducts.forEach(product => productGrid.appendChild(product));
+                }
+            }
+
+            // Function to reset all filters
+            function clearAllFilters() {
+                sortBySelect.value = 'default';
+                filterPlatformSelect.value = 'all';
+                filterRankSelect.value = 'all';
+                applyFiltersAndSort(); // Re-apply filters to show all products
             }
 
             // Event Listeners for changes on the dropdowns
             sortBySelect.addEventListener('change', applyFiltersAndSort);
             filterPlatformSelect.addEventListener('change', applyFiltersAndSort);
             filterRankSelect.addEventListener('change', applyFiltersAndSort);
+
+            // Event listener for Clear Filters button
+            clearFiltersButton.addEventListener('click', clearAllFilters);
 
             // Initial call to apply any default sorting/filtering on page load
             applyFiltersAndSort();

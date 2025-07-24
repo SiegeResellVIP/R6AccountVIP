@@ -1,534 +1,63 @@
-/* KEYFRAMES FOR GLOBAL FADE-IN ANIMATION */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siege Resell VIP - Beginner's Starter Account</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Siege Resell VIP</h1>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
 
-/* PARTICLES.JS CONTAINER STYLES (for the animated background) */
-#particles-js {
-    position: fixed; /* Fixes it to the viewport */
-    width: 100%;
-    height: 100%;
-    background-color: #1a1a2e; /* Your body background color - should match for seamless transition */
-    background-image: url(''); /* No specific background image for particles by default */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-    z-index: -1; /* Puts it behind all other content */
-}
+    <main>
+        <section class="product-detail">
+            <img src="product3-large.jpg" alt="Starter Account">
+            <h2>Beginner's Starter Account</h2>
+            <p class="price-placeholder">Inquire for Price</p>
+            <p>This is a perfect entry-level account for new Rainbow Six Siege players or those looking for a fresh start. It comes with the core set of operators unlocked, allowing you to quickly get into the action without the initial grind. Clean MMR history.</p>
+            <ul>
+                <li>Rank: Unranked (Ready for placement matches)</li>
+                <li>Operators: All original 20 operators unlocked</li>
+                <li>Renown: 25,000+ renown saved for purchases</li>
+                <li>Cosmetics: Basic starter bundles included</li>
+                <li>Platform: PC (Uplay) - transferable</li>
+                <li>Delivery: Instant upon payment confirmation</li>
+            </ul>
 
-/* GENERAL BODY & LAYOUT STYLES */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1a1a2e; /* Dark background */
-    color: #e0e0e0; /* Light text */
-    line-height: 1.6;
+            <h3>Interested in This Account?</h3>
+            <p>Fill out the form below. We'll contact you to confirm details & arrange transfer.</p>
 
-    /* Global Fade-in animation for the whole page */
-    animation: fadeIn 1s ease-out forwards;
+            <!-- Netlify Form for Inquiry -->
+            <form name="product-inquiry" method="POST" data-netlify="true">
+                <!-- !!! CRUCIAL: Hidden field to identify the product !!! -->
+                <input type="hidden" name="product-of-interest" value="Beginner's Starter Account">
 
-    position: relative; /* Ensure body establishes a stacking context for z-index */
-    z-index: 0; /* Ensures body content appears above particles */
-}
+                <p>
+                    <label for="name">Your Name:</label><br>
+                    <input type="text" id="name" name="name" required>
+                </p>
+                <p>
+                    <label for="phone">Your Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" required>
+                </p>
+                <p>
+                    <label for="message">Optional Message:</label><br>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </p>
+                <p>
+                    <button type="submit">Send Inquiry</button>
+                </p>
+            </form>
+        </section>
+    </main>
 
-/* Ensure header, main, and footer appear above the particles background */
-header, main, footer {
-    position: relative;
-    z-index: 1;
-}
-
-/* HEADER STYLES */
-header {
-    background-color: #0f0f2b; /* Even darker header */
-    color: #fff;
-    padding: 1.5rem 0;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    letter-spacing: 1px;
-}
-
-/* NAVIGATION STYLES */
-nav {
-    margin-top: 10px;
-}
-
-nav a {
-    color: #a0a0ff; /* Accent color for links */
-    text-decoration: none;
-    margin: 0 20px;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-nav a:hover {
-    color: #fff;
-}
-
-/* GENERAL BUTTON STYLES */
-.button {
-    display: inline-block;
-    background-color: #6a0571; /* Purple button */
-    color: #fff;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
-}
-
-.button:hover {
-    background-color: #8c0792;
-    transform: translateY(-2px); /* Makes it lift slightly */
-}
-
-/* MAIN CONTENT AREA STYLES */
-main {
-    padding: 30px 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #1e1e3b; /* Slightly lighter dark background for main content */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-}
-
-section {
-    margin-bottom: 50px;
-}
-
-h2, h3 {
-    color: #e0e0e0;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
-}
-
-/* HERO SECTION SPECIFIC STYLES */
-#hero {
-    text-align: center;
-    padding: 50px 0;
-    background-color: #2a2a4a; /* Background for the hero content area */
-    border-radius: 8px;
-    margin-bottom: 40px;
-}
-
-#hero p {
-    font-size: 1.2em;
-    max-width: 800px;
-    margin: 0 auto 20px auto;
-}
-
-/* FILTER CONTROLS STYLES (NEW/UPDATED) */
-.filter-controls {
-    text-align: center;
-    margin-bottom: 30px;
-    background-color: #2a2a4a;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    display: flex; /* Arrange elements horizontally */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    justify-content: center; /* Center horizontally */
-    gap: 20px; /* Space between filter elements */
-}
-
-.filter-controls label {
-    font-weight: bold;
-    color: #a0a0ff;
-    margin-right: 10px;
-    align-self: center; /* Vertically align with dropdowns */
-}
-
-.filter-controls select {
-    padding: 10px 30px 10px 15px; /* Added right padding for custom arrow */
-    border-radius: 5px;
-    border: 1px solid #a0a0ff; /* Lighter accent border */
-    background-color: #3b3b6b;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    /* Custom arrow for single selects - default multi-select doesn't support this easily */
-    appearance: none; /* Remove default dropdown arrow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 12px auto;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-}
-
-.filter-controls select:hover {
-    border-color: #fff; /* White border on hover */
-}
-
-.filter-controls select:focus {
-    outline: none;
-    border-color: #fff; /* White border on focus */
-    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3); /* Soft glow */
-}
-
-/* PRODUCT GRID LAYOUT (ON HOMEPAGE) */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-/* INDIVIDUAL PRODUCT ITEM STYLES (ON HOMEPAGE) */
-.product-item {
-    background-color: #2a2a4a;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
-}
-
-.product-item:hover {
-    transform: translateY(-5px); /* Makes it lift slightly */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Slightly stronger shadow */
-}
-
-.product-item img {
-    max-width: 100%;
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Cover ensures image fills the space */
-    border-radius: 4px;
-    margin-bottom: 15px;
-    border: 1px solid #444;
-}
-
-.product-item h3 {
-    font-size: 1.8em;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #fff;
-}
-
-/* Short description on product card */
-.product-item .description-short {
-    font-size: 0.95em; /* Slightly smaller font for brevity */
-    margin-bottom: 15px;
-    color: #ccc;
-    height: 3em; /* Give it a fixed height to prevent layout shifts */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Add ellipsis for hidden text */
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    -webkit-box-orient: vertical;
-}
-
-/* Account Stats on Product Cards (Homepage) - NEW STYLES */
-.account-stats {
-    margin-top: 15px;
-    margin-bottom: 15px; /* Space above button */
-    display: flex;
-    flex-wrap: wrap; /* Allow stats to wrap on small screens */
-    justify-content: center;
-    gap: 10px; /* Space between stat items */
-}
-
-.account-stats span {
-    background-color: #3b3b6b; /* Darker background for stat tags */
-    color: #a0a0ff; /* Accent color for stats */
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    font-weight: bold;
-    white-space: nowrap; /* Prevent breaking across lines */
-}
-
-/* PRODUCT DETAIL PAGE SPECIFIC STYLES */
-.product-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    padding: 30px;
-    background-color: #2a2a4a;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-}
-
-.product-detail img {
-    max-width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 8px;
-    border: 1px solid #444;
-}
-
-.product-detail h2 {
-    font-size: 2.8em;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.product-detail .price-placeholder {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #a0a0ff;
-    margin-bottom: 20px;
-}
-
-.product-detail p {
-    font-size: 1.1em;
-    max-width: 800px;
-    text-align: center;
-    color: #e0e0e0;
-}
-
-.product-detail ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-    text-align: left; /* Align list items left */
-    max-width: 600px;
-    width: 100%;
-}
-
-.product-detail ul li {
-    background-color: #3b3b6b;
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-}
-
-.product-detail ul li::before {
-    content: '✅'; /* Checkmark icon */
-    margin-right: 10px;
-}
-
-/* FORM STYLES (for product detail page forms) */
-form {
-    max-width: 500px;
-    width: 100%;
-    margin: 30px auto; /* Centered and space above */
-    padding: 25px;
-    background-color: #1e1e3b;
-    border: 1px solid #444;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-form h3 {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 2em;
-}
-
-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #ccc;
-}
-
-form input[type="text"],
-form input[type="tel"],
-form textarea {
-    width: calc(100% - 20px); /* Adjust for padding */
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #3b3b6b;
-    border: 1px solid #6a0571; /* Purple border */
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1em;
-}
-
-form input[type="text"]:focus,
-form input[type="tel"]:focus,
-form textarea:focus {
-    outline: none;
-    border-color: #a0a0ff; /* Light purple on focus */
-    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3);
-}
-
-form button[type="submit"] {
-    background-color: #008000; /* Green submit button */
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    display: block; /* Make button full width if needed, or center with margin auto */
-    margin: 0 auto;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-form button[type="submit"]:hover {
-    background-color: #006400;
-    transform: translateY(-2px);
-}
-
-/* FOOTER STYLES */
-footer {
-    text-align: center;
-    padding: 25px;
-    background-color: #0f0f2b;
-    color: #aaa;
-    margin-top: 40px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
-}
-
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 768px) {
-    /* Header & Navigation */
-    header h1 {
-        font-size: 1.8em;
-    }
-    nav {
-        flex-direction: column;
-        align-items: center;
-        padding: 0 10px;
-    }
-    nav a {
-        margin: 8px 0;
-        font-size: 0.95em;
-    }
-
-    /* Main Content Area */
-    main {
-        margin: 10px auto;
-        padding: 15px;
-    }
-
-    /* Hero Section */
-    #hero {
-        padding: 30px 10px;
-    }
-    #hero p {
-        font-size: 1em;
-        padding: 0 10px;
-    }
-    .button {
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
-
-    /* FILTER CONTROLS */
-    .filter-controls {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    .filter-controls label,
-    .filter-controls select {
-        width: 100%;
-        max-width: 250px;
-        margin-right: 0;
-    }
-
-    /* Product Grid (Homepage) */
-    .product-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .product-item {
-        padding: 15px;
-    }
-    .product-item img {
-        height: 180px;
-    }
-    .product-item h3 {
-        font-size: 1.6em;
-    }
-    .product-item .description-short,
-    .product-item p { /* Added p to catch other paragraphs if any */
-        font-size: 0.85em; /* Smaller on mobile for brevity */
-        height: auto; /* Remove fixed height for mobile */
-        -webkit-line-clamp: unset; /* Remove line clamp on mobile */
-    }
-    .account-stats {
-        flex-direction: column; /* Stack stats vertically on mobile */
-        gap: 5px;
-    }
-    .account-stats span {
-        font-size: 0.8em; /* Smaller font for stats */
-    }
-
-    /* Product Detail Page */
-    .product-detail {
-        flex-direction: column;
-        padding: 20px;
-        gap: 20px;
-    }
-    .product-detail img {
-        max-height: 250px;
-    }
-    .product-detail h2 {
-        font-size: 2.2em;
-        word-break: break-word;
-        padding: 0 10px;
-    }
-    .product-detail .price-placeholder {
-        font-size: 1.2em;
-    }
-    .product-detail p {
-        font-size: 1em;
-        padding: 0 10px;
-    }
-    .product-detail ul {
-        width: calc(100% - 20px);
-        padding: 0 10px;
-    }
-    .product-detail ul li {
-        padding: 8px 12px;
-        font-size: 0.95em;
-    }
-
-    /* Form Styles */
-    form {
-        padding: 15px;
-    }
-    form input[type="text"],
-    form input[type="tel"],
-    form textarea {
-        width: calc(100% - 20px);
-        font-size: 0.95em;
-    }
-    form button[type="submit"] {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
-
-    /* Footer */
-    footer {
-        padding: 15px;
-        font-size: 0.9em;
-    }
-}
-
-/* Optional: Additional breakpoint for very small phones (e.g., iPhone 5/SE, smaller Androids) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-    nav a {
-        font-size: 0.85em;
-    }
-    .button {
-        padding: 8px 15px;
-        font-size: 0.8em;
-    }
-    .product-detail h2 {
-        font-size: 1.8em;
-    }
-}
+    <footer>
+        <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
+    </footer>
+</body>
+</html>
