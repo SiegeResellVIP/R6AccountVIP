@@ -348,7 +348,7 @@ h2, h3 {
 /* FORM STYLES (for product detail page forms) */
 form {
     max-width: 500px;
-    width: 100%;
+    width: 100%; /* Important for mobile centering */
     margin: 30px auto; /* Centered and space above */
     padding: 25px;
     background-color: #1e1e3b;
@@ -535,9 +535,14 @@ footer {
         font-size: 0.95em;
     }
 
-    /* Form Styles */
+    /* Form Styles (Mobile specific) */
     form {
-        padding: 15px;
+        width: 100%; /* Force form to take full width of its container */
+        max-width: 400px; /* Limit its size so it doesn't get too wide on tablets */
+        padding: 15px; /* Reduce form padding */
+        box-sizing: border-box; /* Include padding in width calculation */
+        margin-left: auto; /* Re-apply auto margins to ensure centering */
+        margin-right: auto;
     }
     form input[type="text"],
     form input[type="tel"],
