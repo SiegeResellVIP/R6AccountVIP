@@ -11,7 +11,7 @@
     <div id="particles-js"></div>
 
     <header>
-        <h1>Welcome to Siege Resell VIP!</h1>
+        <h1>Siege Resell VIP</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="#products">Our Inventory</a>
@@ -19,10 +19,11 @@
     </header>
 
     <main>
-        <!-- HERO SECTION: Simple and clean -->
+        <!-- HERO SECTION: More direct headline, clearer action -->
         <section id="hero">
-            <p>Your premier destination for high-value Siege accounts and exclusive gaming assets. Click to view our inventory and inquire!</p>
-            <a href="#products" class="button">View Available Accounts</a>
+            <h2>Your Next Level, Instantly.</h2>
+            <p>Premium R6 Siege Accounts. Verified. Secure. Ready to Play.</p>
+            <a href="#products" class="button">Explore Accounts</a>
         </section>
 
         <!-- PRODUCT LISTING SECTION with FILTER & SORT -->
@@ -52,32 +53,32 @@
             <div class="product-grid">
 
                 <!-- Product 1: Diamond Tier Account -->
-                <!-- Data attributes for filtering/sorting: data-platform, data-rank-value (for numerical sorting), data-price-value (for numerical sorting) -->
+                <!-- Data attributes for filtering/sorting. IMPORTANT: Match these to your products' details. -->
                 <div class="product-item" data-platform="pc" data-rank-value="3" data-price-value="300">
                     <img src="product1.jpg" alt="Diamond Rank Account">
                     <h3>Diamond Tier Account</h3>
-                    <p>High-level Diamond rank account with exclusive skins and operator unlocks. Ready for competitive play.</p>
-                    <a href="product1.html" class="button buy-button">View Details & Inquire</a>
+                    <p>High-level Diamond rank, exclusive skins. Competitive ready.</p>
+                    <a href="product1.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Product 2: Collector's Pro League Account -->
                 <div class="product-item" data-platform="pc" data-rank-value="4" data-price-value="500">
                     <img src="product2.jpg" alt="Pro League Account">
                     <h3>Collector's Pro League Account</h3>
-                    <p>Rare account featuring past Pro League bundles, charm sets, and discontinued elite skins.</p>
-                    <a href="product2.html" class="button buy-button">View Details & Inquire</a>
+                    <p>Rare Pro League bundles, charm sets. A true collectible.</p>
+                    <a href="product2.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Product 3: Beginner's Starter Account -->
                 <div class="product-item" data-platform="pc" data-rank-value="0" data-price-value="50">
                     <img src="product3.jpg" alt="Starter Account">
                     <h3>Beginner's Starter Account</h3>
-                    <p>Great value account for new players with essential operators unlocked and a clean slate for ranking.</p>
-                    <a href="product3.html" class="button buy-button">View Details & Inquire</a>
+                    <p>Essential operators unlocked, clean slate. Perfect for new players.</p>
+                    <a href="product3.html" class="button buy-button">View & Inquire</a>
                 </div>
 
                 <!-- Add more product items here by copying and pasting a product-item div -->
-                <!-- IMPORTANT: Remember to update data-platform, data-rank-value, data-price-value for each new product -->
+                <!-- REMINDER: Update data-platform, data-rank-value, data-price-value for each new product -->
 
             </div>
         </section>
@@ -126,11 +127,13 @@
                             const priceB = parseInt(b.dataset.priceValue);
                             return sortOrder === 'price-asc' ? priceA - priceB : priceB - priceA;
                         } else if (sortOrder.includes('rank')) {
+                            // Define your rank order numerically. Higher value = higher rank.
+                            // Ensure data-rank-value in your HTML accurately reflects this.
                             const rankA = parseInt(a.dataset.rankValue);
                             const rankB = parseInt(b.dataset.rankValue);
                             return sortOrder === 'rank-asc' ? rankA - rankB : rankB - rankA;
                         }
-                        return 0;
+                        return 0; // Fallback
                     });
                 }
 
