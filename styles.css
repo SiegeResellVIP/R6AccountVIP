@@ -85,11 +85,10 @@ nav a:hover {
 }
 
 .button:hover {
-    background-color: #8c0792;
+    background-color: #8c0571; /* Consistent hover color */
     transform: translateY(-2px); /* Makes it lift slightly */
 }
 
-/* MAIN CONTENT AREA STYLES */
 main {
     padding: 30px 20px;
     max-width: 1200px;
@@ -125,7 +124,7 @@ h2, h3 {
     margin: 0 auto 20px auto;
 }
 
-/* FILTER CONTROLS STYLES (NEW/UPDATED) */
+/* FILTER CONTROLS STYLES */
 .filter-controls {
     text-align: center;
     margin-bottom: 30px;
@@ -146,6 +145,7 @@ h2, h3 {
     align-self: center; /* Vertically align with dropdowns */
 }
 
+/* Styling for SELECT dropdowns */
 .filter-controls select {
     padding: 10px 30px 10px 15px; /* Added right padding for custom arrow */
     border-radius: 5px;
@@ -154,10 +154,11 @@ h2, h3 {
     color: #fff;
     font-size: 1em;
     cursor: pointer;
-    /* Custom arrow for single selects - default multi-select doesn't support this easily */
-    appearance: none; /* Remove default dropdown arrow */
+    /* Custom arrow for single selects - remove default browser styling */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    /* Inline SVG for a custom dropdown arrow (purple) */
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
@@ -175,7 +176,7 @@ h2, h3 {
     box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3); /* Soft glow */
 }
 
-/* PRODUCT GRID LAYOUT (ON HOMEPAGE) */
+/* PRODUCT GRID LAYOUT */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -214,20 +215,21 @@ h2, h3 {
     color: #fff;
 }
 
-/* Short description on product card */
+/* Short description on product card (new class) */
 .product-item .description-short {
     font-size: 0.95em; /* Slightly smaller font for brevity */
     margin-bottom: 15px;
     color: #ccc;
-    height: 3em; /* Give it a fixed height to prevent layout shifts */
+    height: 3em; /* Fixed height for consistent card size */
     overflow: hidden; /* Hide overflowing text */
     text-overflow: ellipsis; /* Add ellipsis for hidden text */
-    display: -webkit-box;
+    display: -webkit-box; /* For multi-line ellipsis */
     -webkit-line-clamp: 2; /* Limit to 2 lines */
     -webkit-box-orient: vertical;
 }
 
-/* Account Stats on Product Cards (Homepage) - NEW STYLES */
+
+/* Account Stats on Product Cards (Homepage) */
 .account-stats {
     margin-top: 15px;
     margin-bottom: 15px; /* Space above button */
@@ -245,6 +247,37 @@ h2, h3 {
     font-size: 0.85em;
     font-weight: bold;
     white-space: nowrap; /* Prevent breaking across lines */
+}
+
+/* NO RESULTS MESSAGE STYLES */
+#no-results-message {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #2a2a4a;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    margin-top: 30px;
+}
+
+#no-results-message h3 {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+#no-results-message p {
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+/* Style for the Clear Filters button (reusing .button style) */
+#no-results-message .button {
+    background-color: #6a0571; /* Match primary button color */
+    padding: 12px 30px;
+}
+
+#no-results-message .button:hover {
+    background-color: #8c0571;
 }
 
 /* PRODUCT DETAIL PAGE SPECIFIC STYLES */
@@ -462,6 +495,14 @@ footer {
     }
     .account-stats span {
         font-size: 0.8em; /* Smaller font for stats */
+    }
+
+    /* NO RESULTS MESSAGE */
+    #no-results-message {
+        padding: 30px 15px;
+    }
+    #no-results-message h3 {
+        font-size: 1.6em;
     }
 
     /* Product Detail Page */
