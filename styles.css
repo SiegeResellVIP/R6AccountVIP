@@ -125,9 +125,6 @@ h2, h3 {
     margin: 0 auto 20px auto;
 }
 
-/* HOW IT WORKS SECTION (Removed from this version of index.html) */
-/* WHY CHOOSE US SECTION (Removed from this version of index.html) */
-
 /* FILTER CONTROLS STYLES (NEW/UPDATED) */
 .filter-controls {
     text-align: center;
@@ -157,10 +154,11 @@ h2, h3 {
     color: #fff;
     font-size: 1em;
     cursor: pointer;
+    /* Custom arrow for single selects - default multi-select doesn't support this easily */
     appearance: none; /* Remove default dropdown arrow */
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E'); /* Custom dropdown arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     background-size: 12px auto;
@@ -216,10 +214,17 @@ h2, h3 {
     color: #fff;
 }
 
-.product-item p {
-    font-size: 1em;
+/* Short description on product card */
+.product-item .description-short {
+    font-size: 0.95em; /* Slightly smaller font for brevity */
     margin-bottom: 15px;
     color: #ccc;
+    height: 3em; /* Give it a fixed height to prevent layout shifts */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis for hidden text */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
 }
 
 /* Account Stats on Product Cards (Homepage) - NEW STYLES */
@@ -387,69 +392,77 @@ footer {
 @media (max-width: 768px) {
     /* Header & Navigation */
     header h1 {
-        font-size: 1.8em; /* Slightly smaller on mobile */
+        font-size: 1.8em;
     }
     nav {
-        display: flex; /* Make nav items flexible */
-        flex-direction: column; /* Stack them vertically */
-        align-items: center; /* Center them */
-        padding: 0 10px; /* Add some side padding */
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
     }
     nav a {
-        margin: 8px 0; /* More vertical space between links */
-        font-size: 0.95em; /* Slightly smaller font */
+        margin: 8px 0;
+        font-size: 0.95em;
     }
 
     /* Main Content Area */
     main {
-        margin: 10px auto; /* Less vertical margin on mobile */
-        padding: 15px; /* Less internal padding */
+        margin: 10px auto;
+        padding: 15px;
     }
 
     /* Hero Section */
     #hero {
-        padding: 30px 10px; /* Adjust padding */
+        padding: 30px 10px;
     }
     #hero p {
-        font-size: 1em; /* Ensure text is not too large */
-        padding: 0 10px; /* Add some horizontal padding for text */
+        font-size: 1em;
+        padding: 0 10px;
     }
     .button {
-        padding: 10px 20px; /* Slightly smaller buttons */
+        padding: 10px 20px;
         font-size: 0.9em;
     }
 
     /* FILTER CONTROLS */
     .filter-controls {
-        flex-direction: column; /* Stack controls vertically */
+        flex-direction: column;
         align-items: center;
         gap: 15px;
     }
     .filter-controls label,
     .filter-controls select {
-        width: 100%; /* Take full width */
-        max-width: 250px; /* Limit max width */
+        width: 100%;
+        max-width: 250px;
         margin-right: 0;
     }
 
     /* Product Grid (Homepage) */
     .product-grid {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
-        gap: 20px; /* Reduce gap between stacked items */
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     .product-item {
-        padding: 15px; /* Adjust padding */
+        padding: 15px;
     }
     .product-item img {
-        height: 180px; /* Slightly smaller image height */
+        height: 180px;
     }
     .product-item h3 {
-        font-size: 1.6em; /* Adjust font size */
+        font-size: 1.6em;
     }
-    .product-item p {
-        font-size: 0.9em; /* Adjust font size */
+    .product-item .description-short,
+    .product-item p { /* Added p to catch other paragraphs if any */
+        font-size: 0.85em; /* Smaller on mobile for brevity */
+        height: auto; /* Remove fixed height for mobile */
+        -webkit-line-clamp: unset; /* Remove line clamp on mobile */
     }
-
+    .account-stats {
+        flex-direction: column; /* Stack stats vertically on mobile */
+        gap: 5px;
+    }
+    .account-stats span {
+        font-size: 0.8em; /* Smaller font for stats */
+    }
 
     /* Product Detail Page */
     .product-detail {

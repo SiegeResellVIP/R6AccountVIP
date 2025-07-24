@@ -19,7 +19,7 @@
     </header>
 
     <main>
-        <!-- HERO SECTION: More direct headline, clearer action -->
+        <!-- HERO SECTION -->
         <section id="hero">
             <h2>Your Next Level, Instantly.</h2>
             <p>Premium R6 Siege Accounts. Verified. Secure. Ready to Play.</p>
@@ -42,14 +42,16 @@
                 </select>
 
                 <label for="filter-platform">Platform:</label>
-                <select id="filter-platform" multiple size="3"> <!-- ADDED multiple and size -->
+                <select id="filter-platform"> <!-- Single select now -->
+                    <option value="all">All Platforms</option>
                     <option value="pc">PC</option>
-                    <option value="ps">PlayStation</</option>
+                    <option value="ps">PlayStation</option>
                     <option value="xbox">Xbox</option>
                 </select>
 
                 <label for="filter-rank">Rank:</label>
-                <select id="filter-rank" multiple size="5"> <!-- NEW Rank filter -->
+                <select id="filter-rank"> <!-- Single select now -->
+                    <option value="all">All Ranks</option>
                     <option value="unranked">Unranked</option>
                     <option value="copper">Copper</option>
                     <option value="bronze">Bronze</option>
@@ -60,7 +62,6 @@
                     <option value="champion">Champion</option>
                     <option value="collector">Collector</option>
                 </select>
-                <!-- Add more multi-select filters as needed here (e.g., for specific skins, operators) -->
             </div>
 
             <div class="product-grid">
@@ -70,7 +71,7 @@
                 <div class="product-item" data-platform="pc" data-rank="diamond" data-rank-value="6" data-price-value="300" data-kd="1.35" data-level="250">
                     <img src="product1.jpg" alt="Diamond Rank Account">
                     <h3>Diamond Tier Account</h3>
-                    <p>High-level Diamond rank, exclusive skins. Competitive ready.</p>
+                    <p class="description-short">High-level Diamond rank, exclusive skins. Competitive ready.</p>
                     <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
                         <span>Rank: Diamond</span>
                         <span>Level: 250</span>
@@ -83,7 +84,7 @@
                 <div class="product-item" data-platform="pc" data-rank="collector" data-rank-value="8" data-price-value="500" data-kd="1.10" data-level="180">
                     <img src="product2.jpg" alt="Pro League Account">
                     <h3>Collector's Pro League Account</h3>
-                    <p>Rare Pro League bundles, charm sets. A true collectible.</p>
+                    <p class="description-short">Rare Pro League bundles, charm sets. A true collectible.</p>
                     <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
                         <span>Rank: Collector</span>
                         <span>Level: 180</span>
@@ -96,7 +97,7 @@
                 <div class="product-item" data-platform="pc" data-rank="unranked" data-rank-value="0" data-price-value="50" data-kd="0.90" data-level="50">
                     <img src="product3.jpg" alt="Starter Account">
                     <h3>Beginner's Starter Account</h3>
-                    <p>Essential operators unlocked, clean slate. Perfect for new players.</p>
+                    <p class="description-short">Essential operators unlocked, clean slate. Perfect for new players.</p>
                     <div class="account-stats"> <!-- NEW CONTAINER FOR STATS -->
                         <span>Rank: Unranked</span>
                         <span>Level: 50</span>
@@ -132,17 +133,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             const productGrid = document.querySelector('.product-grid');
             // Create a copy of the original product items when the page loads
-            const products = Array.from(productGrid.children); 
+            const products = Array.from(productGrid.children);
 
             const sortBySelect = document.getElementById('sort-by');
             const filterPlatformSelect = document.getElementById('filter-platform');
-            const filterRankSelect = document.getElementById('filter-rank'); 
+            const filterRankSelect = document.getElementById('filter-rank');
 
             // Define numerical order for ranks (higher value = higher rank for sorting)
             const rankOrderMap = {
                 "unranked": 0, "copper": 1, "bronze": 2, "silver": 3,
                 "gold": 4, "platinum": 5, "diamond": 6, "champion": 7,
-                "collector": 8 
+                "collector": 8
             };
 
             function applyFiltersAndSort() {
@@ -150,19 +151,19 @@
 
                 // --- 1. Apply Filters ---
 
-                // Platform Filter (multi-select)
-                const selectedPlatforms = Array.from(filterPlatformSelect.selectedOptions).map(option => option.value);
-                if (selectedPlatforms.length > 0) { // If any platforms are selected
+                // Platform Filter (single select)
+                const selectedPlatform = filterPlatformSelect.value;
+                if (selectedPlatform !== 'all') {
                     currentProducts = currentProducts.filter(product =>
-                        selectedPlatforms.includes(product.dataset.platform)
+                        product.dataset.platform === selectedPlatform
                     );
                 }
 
-                // Rank Filter (multi-select)
-                const selectedRanks = Array.from(filterRankSelect.selectedOptions).map(option => option.value);
-                if (selectedRanks.length > 0) { // If any ranks are selected
+                // Rank Filter (single select)
+                const selectedRank = filterRankSelect.value;
+                if (selectedRank !== 'all') {
                     currentProducts = currentProducts.filter(product =>
-                        selectedRanks.includes(product.dataset.rank)
+                        product.dataset.rank === selectedRank
                     );
                 }
 
