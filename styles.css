@@ -22,7 +22,7 @@ body {
 }
 
 /* Z-index for elements above particles */
-header, main, footer, .filter-controls, .product-grid, .faq-section { /* Added .faq-section */
+header, main, footer, .filter-controls, .product-grid, .faq-section {
     position: relative;
     z-index: 2; /* Higher than particles */
 }
@@ -605,14 +605,21 @@ footer {
     header h1 {
         font-size: 1.8em;
     }
+    /* Fixed Mobile Navigation Centering */
     nav {
+        display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 0 10px;
+        align-items: center; /* Centers items horizontally */
+        width: 100%; /* Ensures it takes full width */
+        padding: 0; /* Remove horizontal padding */
+        margin-top: 10px; /* Keep vertical spacing */
+        justify-content: center; /* Ensures content within flex is centered */
     }
     nav a {
-        margin: 8px 0;
+        width: fit-content; /* Prevent stretching */
+        margin: 8px auto; /* Auto horizontal margin for centering individual links */
         font-size: 0.95em;
+        text-align: center; /* Ensure text is centered within link */
     }
     nav a::after {
         display: none; /* Hide underline on small screens */
@@ -662,11 +669,11 @@ footer {
     .filter-controls label,
     .filter-controls select {
         width: 100%;
-        max-width: 280px; /* Give a bit more width on mobile */
+        max-width: 280px;
         margin-right: 0;
     }
     .filter-controls select {
-        padding: 10px 25px 10px 10px; /* Adjust padding for smaller width */
+        padding: 10px 25px 10px 10px;
     }
 
 
@@ -676,10 +683,10 @@ footer {
     }
     .product-item {
         padding: 15px;
-        transform: none; /* No lift on mobile cards */
+        transform: none;
     }
     .product-item:hover {
-        transform: none; /* No lift on mobile cards */
+        transform: none;
     }
     .product-item img {
         height: 160px;
@@ -689,7 +696,7 @@ footer {
     }
     .product-item .description-short {
         font-size: 0.85em;
-        height: auto; /* Allow full text on mobile */
+        height: auto;
         -webkit-line-clamp: unset;
     }
     .account-stats {
@@ -737,13 +744,13 @@ footer {
     }
 
     form {
-        max-width: 100%; /* Ensure it spans fully on small screens */
+        max-width: 100%;
         padding: 20px;
     }
     form input[type="text"],
     form input[type="tel"],
     form textarea {
-        width: calc(100% - 24px); /* Keep box-sizing in mind with padding */
+        width: calc(100% - 24px);
         padding: 10px;
         font-size: 0.9em;
     }
