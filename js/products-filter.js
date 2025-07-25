@@ -1,33 +1,31 @@
 // products-filter.js
-// Filters & sorts your product grid
 document.addEventListener('DOMContentLoaded', () => {
-  const grid   = document.querySelector('.product-grid');
+  const grid = document.querySelector('.product-grid');
   if (!grid) return;
 
-  const items                = Array.from(grid.children);
-  const sortBy               = document.getElementById('sort-by');
-  const filterPlatform       = document.getElementById('filter-platform');
-  const filterRank           = document.getElementById('filter-rank');
-  const noResults            = document.getElementById('no-results-message');
-  const clearBtn             = document.getElementById('clear-filters-button');
+  const items = Array.from(grid.children);
+  const sortBy = document.getElementById('sort-by');
+  const filterPlatform = document.getElementById('filter-platform');
+  const filterRank = document.getElementById('filter-rank');
+  const noResults = document.getElementById('no-results-message');
+  const clearBtn = document.getElementById('clear-filters-button');
+
   const rankOrderMap = {
-    unranked:0, copper:1, bronze:2, silver:3,
-    gold:4, platinum:5, diamond:6,
-    champion:7, collector:8
+    unranked: 0, copper: 1, bronze: 2, silver: 3,
+    gold: 4, platinum: 5, diamond: 6,
+    champion: 7, collector: 8
   };
 
-  function applyFiltersAndSort() {
-    let current = items.slice();
-
-    // filter
-    if (filterPlatform.value !== 'all')
-      current = current.filter(p => p.dataset.platform === filterPlatform.value);
-    if (filterRank.value !== 'all')
-      current = current.filter(p => p.dataset.rank === filterRank.value);
-
-    // sort
+  function apply() {
+    let curr = items.slice();
+    if (filterPlatform.value !== 'all') {
+      curr = curr.filter(p => p.dataset.platform === filterPlatform.value);
+    }
+    if (filterRank.value !== 'all') {
+      curr = curr.filter(p => p.dataset.rank === filterRank.value);
+    }
     if (sortBy.value !== 'default') {
-      current.sort((a,b) => {
+      curr.sort((a,b) => {
         if (sortBy.value.includes('price')) {
           const pa = +a.dataset.priceValue, pb = +b.dataset.priceValue;
           return sortBy.value==='price-asc' ? pa-pb : pb-pa;
@@ -37,28 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return sortBy.value==='rank-asc' ? ra-rb : rb-ra;
       });
     }
-
-    // render
     grid.innerHTML = '';
-    if (current.length === 0) {
+    if (curr.length === 0) {
       noResults.style.display = 'block';
     } else {
       noResults.style.display = 'none';
-      current.forEach(n => grid.appendChild(n));
+      curr.forEach(n => grid.appendChild(n));
     }
   }
 
-  function clearAllFilters() {
-    sortBy.value         = 'default';
+  function clearAll() {
+    sortBy.value = 'default';
     filterPlatform.value = 'all';
-    filterRank.value     = 'all';
-    applyFiltersAndSort();
+    filterRank.value = 'all';
+    apply();
   }
 
-  sortBy.addEventListener('change', applyFiltersAndSort);
-  filterPlatform.addEventListener('change', applyFiltersAndSort);
-  filterRank.addEventListener('change', applyFiltersAndSort);
-  clearBtn.addEventListener('click', clearAllFilters);
-
-  applyFiltersAndSort();
+  sortBy.addEventListener('change', apply);
+  filterPlatform.addEventListener('change', apply);
+  filterRank.addEventListener('change', apply);
+  clearBtn.addEventListener('click', clearAll);
+  apply();
 });
