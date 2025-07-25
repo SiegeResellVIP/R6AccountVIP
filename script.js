@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- End Header Hide on Scroll ---
 
 
-    // --- Your existing Product Filtering and Sorting Logic (keep this for index.html) ---
+    // --- Your existing Product Filtering and Sorting Logic (only for index.html) ---
     // This part should only run on the index.html page because it refers to elements
     // (like product-grid, filters) that only exist there.
     if (document.getElementById('products')) { // Check if the #products section exists on the page
