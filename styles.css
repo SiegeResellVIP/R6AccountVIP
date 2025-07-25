@@ -64,14 +64,27 @@ header {
     padding: 1.2rem 20px; /* Adjusted padding */
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Stronger shadow */
-    position: fixed; /* NEW: Use fixed for JavaScript control */
+    
+    /* Smart Sticky Header positioning (initial state) */
+    position: absolute; /* Starts as absolute, will be toggled to fixed by JS */
     top: 0;
+    left: 0;
     width: 100%;
-    z-index: 10; /* Ensure header is always on top */
+    z-index: 10; /* Ensure header is always on top when active */
     transition: transform 0.3s ease-out; /* Smooth transition for hiding/showing */
 }
 
-/* Class added by JS to hide header */
+/* Class applied by JS when header becomes fixed/sticky */
+.header-fixed {
+    position: fixed; /* Becomes fixed when scrolled */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Ensure it's on top when fixed */
+    transform: translateY(0%); /* Ensure it's fully visible initially when fixed */
+}
+
+/* Class applied by JS to hide header when scrolling down */
 .header-hidden {
     transform: translateY(-100%); /* Move header fully up and out of view */
 }
@@ -689,7 +702,7 @@ footer {
     .filter-controls label,
     .filter-controls select {
         width: 100%;
-        max-width: 280px; /* Give a bit more width on mobile */
+        max-width: 280px;
         margin-right: 0;
     }
     .filter-controls select {
