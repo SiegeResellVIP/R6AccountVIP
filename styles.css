@@ -9,10 +9,10 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font (requires Google Fonts link in HTML head) */
     margin: 0;
     padding: 0;
-    background-color: #0d1117; /* Very dark background */
+    background-color: #0d1117; /* Very dark background - Eldorado-inspired */
     color: #e6edf3; /* Light grey for text, softer than pure white */
     line-height: 1.6;
     animation: fadeIn 0.8s ease-out forwards; /* Slightly faster fade-in */
@@ -22,7 +22,7 @@ body {
 }
 
 /* Z-index for elements above particles */
-header, main, footer, .filter-controls, .product-grid {
+header, main, footer, .filter-controls, .product-grid, .faq-section { /* Added .faq-section */
     position: relative;
     z-index: 2; /* Higher than particles */
 }
@@ -335,6 +335,97 @@ h3 {
     background: linear-gradient(90deg, #843cc1 0%, #a05fe0 100%); /* Match main button style */
     padding: 14px 30px;
 }
+
+/* FAQ SECTION STYLES (NEW) */
+.faq-section {
+    padding: 40px 25px;
+    background-color: #1e222d; /* Matches existing element backgrounds */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    border: 1px solid #2f363d;
+    margin-bottom: 60px;
+}
+
+.faq-section h2 {
+    color: #e6edf3; /* Matches main heading color */
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(132, 60, 204, 0.3); /* Matches main heading glow */
+}
+
+.faq-section .section-description {
+    text-align: center;
+    font-size: 1.1em;
+    color: #b0b0b0; /* Softer text color */
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-item {
+    background-color: #161b22; /* Slightly darker background for items, matches main container */
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #2f363d;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.faq-item:hover {
+    background-color: #1e222d; /* Slightly lighter on hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+.faq-item .faq-question {
+    color: #843cc1; /* Eldorado purple accent */
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+    /* cursor: pointer; Removing for now as there's no JS toggle */
+}
+
+.faq-item .faq-answer {
+    font-size: 1em;
+    color: #c9d1d9; /* Softer answer text color */
+    line-height: 1.8;
+    padding-left: 10px;
+    border-left: 3px solid #843cc1; /* Accent line matching Eldorado purple */
+}
+
+.faq-item .faq-answer p {
+    margin: 0;
+    text-align: left;
+}
+
+.contact-prompt {
+    text-align: center;
+    margin-top: 60px;
+    padding: 30px;
+    background-color: #2a2a4a; /* Matches product card background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    border: 1px solid #3b3b6b;
+}
+
+.contact-prompt p {
+    font-size: 1.2em;
+    color: #e6edf3;
+    margin-bottom: 25px;
+}
+
+/* Adjust button style for 'Email Us Directly' - using existing .button style but overriding background */
+.contact-prompt .button {
+    background: linear-gradient(90deg, #00b347 0%, #00e05e 100%); /* Green gradient for contact button */
+    margin-top: 0; /* Override default .button margin-top */
+}
+
+.contact-prompt .button:hover {
+    background: linear-gradient(90deg, #00e05e 0%, #00b347 100%); /* Reverse green gradient on hover */
+}
+
 
 /* PRODUCT DETAIL PAGE */
 .product-detail {
