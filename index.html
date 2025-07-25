@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siege Resell VIP - Premium Accounts</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Optional: Link to Google Fonts for 'Roboto' -->
+    <!-- Optional: Link to Google Fonts for 'Roboto' (recommended for Eldorado.gg look) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -142,7 +142,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const productGrid = document.querySelector('.product-grid');
-            // Create a copy of the original product items when the page loads
             const products = Array.from(productGrid.children);
 
             const sortBySelect = document.getElementById('sort-by');
@@ -159,11 +158,9 @@
             };
 
             function applyFiltersAndSort() {
-                let currentProducts = [...products]; // Start with a fresh copy of all original products for each filter/sort operation
+                let currentProducts = [...products];
 
                 // --- 1. Apply Filters ---
-
-                // Platform Filter (single select)
                 const selectedPlatform = filterPlatformSelect.value;
                 if (selectedPlatform !== 'all') {
                     currentProducts = currentProducts.filter(product =>
@@ -171,7 +168,6 @@
                     );
                 }
 
-                // Rank Filter (single select)
                 const selectedRank = filterRankSelect.value;
                 if (selectedRank !== 'all') {
                     currentProducts = currentProducts.filter(product =>
@@ -197,13 +193,11 @@
                 }
 
                 // --- 3. Update the display ---
-                productGrid.innerHTML = ''; // Clear existing products from the grid
+                productGrid.innerHTML = '';
 
                 if (currentProducts.length === 0) {
-                    // Show no-results message if no products match
                     noResultsMessage.style.display = 'block';
                 } else {
-                    // Hide no-results message and display products
                     noResultsMessage.style.display = 'none';
                     currentProducts.forEach(product => productGrid.appendChild(product));
                 }
@@ -214,7 +208,7 @@
                 sortBySelect.value = 'default';
                 filterPlatformSelect.value = 'all';
                 filterRankSelect.value = 'all';
-                applyFiltersAndSort(); // Re-apply filters to show all products
+                applyFiltersAndSort();
             }
 
             // Event Listeners for changes on the dropdowns
@@ -227,6 +221,50 @@
 
             // Initial call to apply any default sorting/filtering on page load
             applyFiltersAndSort();
+        });
+    </script>
+
+    <!-- NEW: JavaScript for Hide on Scroll Header (Mobile Only) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            // Only activate for mobile/smaller screens
+            const isMobile = () => window.innerWidth <= 768;
+
+            function updateHeaderVisibility() {
+                const currentScrollY = window.scrollY;
+
+                if (isMobile()) {
+                    if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
+                        header.classList.add('header-hidden');
+                    } else if (currentScrollY < lastScrollY && currentScrollY < (lastScrollY - 50)) { // Small scroll up threshold
+                        header.classList.remove('header-hidden');
+                    }
+                } else {
+                    // On desktop, ensure header is always visible
+                    header.classList.remove('header-hidden');
+                }
+
+                lastScrollY = currentScrollY;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateHeaderVisibility);
+                    ticking = true;
+                }
+            });
+
+            // Ensure header is visible if resized to desktop from mobile, or on initial load if desktop
+            window.addEventListener('resize', () => {
+                if (!isMobile()) {
+                    header.classList.remove('header-hidden');
+                }
+            });
         });
     </script>
 </body>
