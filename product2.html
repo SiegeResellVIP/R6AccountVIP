@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siege Resell VIP - Collector's Pro League Account</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siege Resell VIP - Collector's Pro League Account</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description"
+        content="Inquiry form for our Collector's Pro League Rainbow Six Siege account.">
 </head>
 <body>
-    <header>
-        <h1>Siege Resell VIP</h1>
-        <nav>
-            <a href="index.html">Home</a>
-        </nav>
-    </header>
+  <header>
+    <h1>Siege Resell VIP</h1>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
 
-    <main>
-        <section class="product-detail">
-            <img src="product2-large.jpg" alt="Pro League Account">
-            <h2>Collector's Pro League Account</h2>
-            <p class="price-placeholder">Inquire for Price</p>
-            <p>This is a rare and highly valuable account for serious collectors, featuring a full set of Year 2 Pro League skins and charms. These items are no longer obtainable, making this account a true piece of Siege history.</p>
-            <ul>
-                <li>Rare Skins: Full Year 2 Pro League Sets (Hibana, Valkyrie, Mute, Thermite)</li>
-                <li>Exclusive Charms: Multiple seasonal and event-specific charms</li>
-                <li>Renown: 150,000+ renown saved</li>
-                <li>Operators: All original operators unlocked, some Year 1</li>
-                <li>Platform: PC (Uplay) - transferable</li>
-            </ul>
+  <main>
+    <section class="product-detail">
+      <img src="product2-large.jpg" alt="Pro League Account">
+      <h2>Collector's Pro League Account</h2>
+      <p class="price-placeholder">Inquire for Price</p>
+      <p>
+        This is a rare and highly valuable account for serious
+        collectors, featuring a full set of Year 2 Pro League skins and
+        charms. These items are no longer obtainable, making this account
+        a true piece of Siege history.
+      </p>
+      <ul>
+        <li>Rare Skins: Full Year 2 Pro League Sets (Hibana, Valkyrie, Mute, Thermite)</li>
+        <li>Exclusive Charms: Multiple seasonal and event-specific charms</li>
+        <li>Renown: 150,000+ renown saved</li>
+        <li>Operators: All original operators unlocked, some Year 1</li>
+        <li>Platform: PC (Uplay) – transferable</li>
+      </ul>
 
-            <h3>Interested in This Account?</h3>
-            <p>Fill out the form below. We'll contact you to confirm details & arrange transfer.</p>
+      <h3>Interested in This Account?</h3>
+      <p>
+        Fill out the form below. We'll contact you to confirm details &
+        arrange transfer.
+      </p>
 
-            <!-- Netlify Form for Inquiry -->
-            <form name="product-inquiry" method="POST" data-netlify="true">
-                <!-- !!! CRUCIAL: Hidden field to identify the product !!! -->
-                <input type="hidden" name="product-of-interest" value="Collector's Pro League Account">
+      <form name="product-inquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="product-of-interest"
+               value="Collector's Pro League Account">
+        <p>
+          <label for="name">Your Name:</label><br>
+          <input type="text" id="name" name="name" required>
+        </p>
+        <p>
+          <label for="phone">Your Phone Number:</label><br>
+          <input type="tel" id="phone" name="phone" required>
+        </p>
+        <p>
+          <label for="message">Optional Message:</label><br>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </p>
+        <p>
+          <button type="submit">Send Inquiry</button>
+        </p>
+      </form>
+    </section>
+  </main>
 
-                <p>
-                    <label for="name">Your Name:</label><br>
-                    <input type="text" id="name" name="name" required>
-                </p>
-                <p>
-                    <label for="phone">Your Phone Number:</label><br>
-                    <input type="tel" id="phone" name="phone" required>
-                </p>
-                <p>
-                    <label for="message">Optional Message:</label><br>
-                    <textarea id="message" name="message" rows="3"></textarea>
-                </p>
-                <p>
-                    <button type="submit">Send Inquiry</button>
-                </p>
-            </form>
-        </section>
-    </main>
+  <footer>
+    <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
-    </footer>
+  <script src="js/common.js" defer></script>
 </body>
 </html>

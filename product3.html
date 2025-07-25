@@ -1,63 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siege Resell VIP - Beginner's Starter Account</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siege Resell VIP - Beginner's Starter Account</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description"
+        content="Inquiry form for our Beginner's Starter Rainbow Six Siege account.">
 </head>
 <body>
-    <header>
-        <h1>Siege Resell VIP</h1>
-        <nav>
-            <a href="index.html">Home</a>
-        </nav>
-    </header>
+  <header>
+    <h1>Siege Resell VIP</h1>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
 
-    <main>
-        <section class="product-detail">
-            <img src="product3-large.jpg" alt="Starter Account">
-            <h2>Beginner's Starter Account</h2>
-            <p class="price-placeholder">Inquire for Price</p>
-            <p>This is a perfect entry-level account for new Rainbow Six Siege players or those looking for a fresh start. It comes with the core set of operators unlocked, allowing you to quickly get into the action without the initial grind. Clean MMR history.</p>
-            <ul>
-                <li>Rank: Unranked (Ready for placement matches)</li>
-                <li>Operators: All original 20 operators unlocked</li>
-                <li>Renown: 25,000+ renown saved for purchases</li>
-                <li>Cosmetics: Basic starter bundles included</li>
-                <li>Platform: PC (Uplay) - transferable</li>
-                <li>Delivery: Instant upon payment confirmation</li>
-            </ul>
+  <main>
+    <section class="product-detail">
+      <img src="product3-large.jpg" alt="Starter Account">
+      <h2>Beginner's Starter Account</h2>
+      <p class="price-placeholder">Inquire for Price</p>
+      <p>
+        This is a perfect entry-level account for new Rainbow Six Siege
+        players or those looking for a fresh start. It comes with the core
+        set of operators unlocked, allowing you to quickly get into the
+        action without the initial grind. Clean MMR history.
+      </p>
+      <ul>
+        <li>Rank: Unranked (Ready for placement matches)</li>
+        <li>Operators: All original 20 operators unlocked</li>
+        <li>Renown: 25,000+ renown saved for purchases</li>
+        <li>Cosmetics: Basic starter bundles included</li>
+        <li>Platform: PC (Uplay) – transferable</li>
+        <li>Delivery: Instant upon payment confirmation</li>
+      </ul>
 
-            <h3>Interested in This Account?</h3>
-            <p>Fill out the form below. We'll contact you to confirm details & arrange transfer.</p>
+      <h3>Interested in This Account?</h3>
+      <p>
+        Fill out the form below. We'll contact you to confirm details &
+        arrange transfer.
+      </p>
 
-            <!-- Netlify Form for Inquiry -->
-            <form name="product-inquiry" method="POST" data-netlify="true">
-                <!-- !!! CRUCIAL: Hidden field to identify the product !!! -->
-                <input type="hidden" name="product-of-interest" value="Beginner's Starter Account">
+      <form name="product-inquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="product-of-interest"
+               value="Beginner's Starter Account">
+        <p>
+          <label for="name">Your Name:</label><br>
+          <input type="text" id="name" name="name" required>
+        </p>
+        <p>
+          <label for="phone">Your Phone Number:</label><br>
+          <input type="tel" id="phone" name="phone" required>
+        </p>
+        <p>
+          <label for="message">Optional Message:</label><br>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </p>
+        <p>
+          <button type="submit">Send Inquiry</button>
+        </p>
+      </form>
+    </section>
+  </main>
 
-                <p>
-                    <label for="name">Your Name:</label><br>
-                    <input type="text" id="name" name="name" required>
-                </p>
-                <p>
-                    <label for="phone">Your Phone Number:</label><br>
-                    <input type="tel" id="phone" name="phone" required>
-                </p>
-                <p>
-                    <label for="message">Optional Message:</label><br>
-                    <textarea id="message" name="message" rows="3"></textarea>
-                </p>
-                <p>
-                    <button type="submit">Send Inquiry</button>
-                </p>
-            </form>
-        </section>
-    </main>
+  <footer>
+    <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
-    </footer>
+  <script src="js/common.js" defer></script>
 </body>
 </html>

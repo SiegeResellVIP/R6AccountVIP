@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siege Resell VIP - Diamond Tier Account</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siege Resell VIP - Diamond Tier Account</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description"
+        content="Inquiry form for our Diamond Tier Rainbow Six Siege account.">
 </head>
 <body>
-    <header>
-        <h1>Siege Resell VIP</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <!-- Add more navigation links here if you create more pages -->
-        </nav>
-    </header>
+  <header>
+    <h1>Siege Resell VIP</h1>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
 
-    <main>
-        <section class="product-detail">
-            <img src="product1-large.jpg" alt="Diamond Rank Account">
-            <h2>Diamond Tier Account</h2>
-            <p class="price-placeholder">Inquire for Price</p>
-            <p>This is a highly sought-after Diamond rank Rainbow Six Siege account, perfect for competitive players looking to jump straight into high-level matchmaking without the grind. It features a solid MMR, numerous operator unlocks, and several desirable cosmetic items.</p>
-            <ul>
-                <li>Current Rank: Diamond I</li>
-                <li>Battle Pass: Fully completed S9 (Grim Sky)</li>
-                <li>Elite Skins: Jager, Ash Black Viper</li>
-                <li>Operators: All Year 1-4 operators unlocked</li>
-                <li>K/D Ratio: 1.35 (Positive)</li>
-                <li>Win Rate: 1.2 (Positive)</li>
-                <li>Platform: PC (Uplay) - transferable</li>
-            </ul>
+  <main>
+    <section class="product-detail">
+      <img src="product1-large.jpg" alt="Diamond Rank Account">
+      <h2>Diamond Tier Account</h2>
+      <p class="price-placeholder">Inquire for Price</p>
+      <p>
+        This is a highly sought-after Diamond rank Rainbow Six Siege
+        account, perfect for competitive players looking to jump
+        straight into high-level matchmaking without the grind. It features
+        a solid MMR, numerous operator unlocks, and several desirable
+        cosmetic items.
+      </p>
+      <ul>
+        <li>Current Rank: Diamond I</li>
+        <li>Battle Pass: Fully completed S9 (Grim Sky)</li>
+        <li>Elite Skins: Jager, Ash Black Viper</li>
+        <li>Operators: All Year 1-4 operators unlocked</li>
+        <li>K/D Ratio: 1.35 (Positive)</li>
+        <li>Win Rate: 1.2 (Positive)</li>
+        <li>Platform: PC (Uplay) – transferable</li>
+      </ul>
 
-            <h3>Interested in This Account?</h3>
-            <p>Fill out the form below. We'll contact you to confirm details & arrange transfer.</p>
+      <h3>Interested in This Account?</h3>
+      <p>
+        Fill out the form below. We'll contact you to confirm details &
+        arrange transfer.
+      </p>
 
-            <!-- Netlify Form for Inquiry -->
-            <form name="product-inquiry" method="POST" data-netlify="true">
-                <!-- !!! CRUCIAL: Hidden field to identify the product !!! -->
-                <input type="hidden" name="product-of-interest" value="Diamond Tier Account">
+      <form name="product-inquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="product-of-interest"
+               value="Diamond Tier Account">
+        <p>
+          <label for="name">Your Name:</label><br>
+          <input type="text" id="name" name="name" required>
+        </p>
+        <p>
+          <label for="phone">Your Phone Number:</label><br>
+          <input type="tel" id="phone" name="phone" required>
+        </p>
+        <p>
+          <label for="message">Optional Message:</label><br>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </p>
+        <p>
+          <button type="submit">Send Inquiry</button>
+        </p>
+      </form>
+    </section>
+  </main>
 
-                <p>
-                    <label for="name">Your Name:</label><br>
-                    <input type="text" id="name" name="name" required>
-                </p>
-                <p>
-                    <label for="phone">Your Phone Number:</label><br>
-                    <input type="tel" id="phone" name="phone" required>
-                </p>
-                <p>
-                    <label for="message">Optional Message:</label><br>
-                    <textarea id="message" name="message" rows="3"></textarea>
-                </p>
-                <p>
-                    <button type="submit">Send Inquiry</button>
-                </p>
-            </form>
-        </section>
-    </main>
+  <footer>
+    <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 Siege Resell VIP. All rights reserved.</p>
-    </footer>
+  <script src="js/common.js" defer></script>
 </body>
 </html>
