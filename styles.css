@@ -1,429 +1,516 @@
-/* KEYFRAMES FOR GLOBAL FADE-IN ANIMATION */
+/* BASE STYLES & ANIMATIONS */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* PARTICLES.JS CONTAINER STYLES (for the animated background) */
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    margin: 0;
+    padding: 0;
+    background-color: #0d1117; /* Very dark background */
+    color: #e6edf3; /* Light grey for text, softer than pure white */
+    line-height: 1.6;
+    animation: fadeIn 0.8s ease-out forwards; /* Slightly faster fade-in */
+    position: relative;
+    z-index: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+}
+
+/* Z-index for elements above particles */
+header, main, footer, .filter-controls, .product-grid {
+    position: relative;
+    z-index: 2; /* Higher than particles */
+}
+
+/* PARTICLES.JS CONTAINER */
 #particles-js {
-    position: fixed; /* Fixes it to the viewport */
+    position: fixed;
     width: 100%;
     height: 100%;
-    background-color: #1a1a2e; /* Your body background color - should match for seamless transition */
-    background-image: url(''); /* No specific background image for particles by default */
+    background-color: #0d1117; /* Match body background */
+    background-image: url('');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
-    z-index: -1; /* Puts it behind all other content */
+    z-index: -1;
 }
 
-/* GENERAL BODY & LAYOUT STYLES */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1a1a2e; /* Dark background */
-    color: #e0e0e0; /* Light text */
-    line-height: 1.6;
-
-    /* Global Fade-in animation for the whole page */
-    animation: fadeIn 1s ease-out forwards;
-
-    position: relative; /* Ensure body establishes a stacking context for z-index */
-    z-index: 0; /* Ensures body content appears above particles */
-}
-
-/* Ensure header, main, and footer appear above the particles background */
-header, main, footer {
-    position: relative;
-    z-index: 1;
-}
-
-/* HEADER STYLES */
+/* HEADER */
 header {
-    background-color: #0f0f2b; /* Even darker header */
+    background-color: rgba(13, 17, 23, 0.9); /* Semi-transparent dark header */
+    backdrop-filter: blur(5px); /* Blurry effect */
     color: #fff;
-    padding: 1.5rem 0;
+    padding: 1.2rem 20px; /* Adjusted padding */
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Stronger shadow */
+    position: sticky; /* Make header stick on scroll */
+    top: 0;
+    width: 100%;
+    z-index: 10; /* Ensure header is always on top */
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5em;
-    letter-spacing: 1px;
+    font-size: 2.2em; /* Slightly smaller for balance */
+    letter-spacing: 0.5px;
+    font-weight: 700; /* Bolder font */
+    text-shadow: 0 0 5px rgba(132, 60, 204, 0.5); /* Subtle purple glow */
 }
 
-/* NAVIGATION STYLES */
+/* NAVIGATION */
 nav {
     margin-top: 10px;
 }
 
 nav a {
-    color: #a0a0ff; /* Accent color for links */
+    color: #843cc1; /* Eldorado-style purple accent */
     text-decoration: none;
-    margin: 0 20px;
-    font-weight: bold;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    margin: 0 18px; /* Adjusted spacing */
+    font-weight: 500; /* Medium weight */
+    font-size: 1.05em;
+    transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    padding-bottom: 5px; /* Space for underline effect */
+}
+
+nav a::after { /* Underline effect on hover */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #a0a0ff; /* Lighter purple for underline */
+    transition: width 0.3s ease, right 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+    background: #a0a0ff;
 }
 
 nav a:hover {
     color: #fff;
+    transform: translateY(-2px); /* Slight lift */
 }
 
-/* GENERAL BUTTON STYLES */
+/* BUTTONS */
 .button {
     display: inline-block;
-    background-color: #6a0571; /* Purple button */
+    background: linear-gradient(90deg, #843cc1 0%, #a05fe0 100%); /* Purple gradient */
     color: #fff;
-    padding: 12px 25px;
+    padding: 14px 30px; /* Larger padding */
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    border-radius: 8px; /* More rounded */
+    font-weight: 600; /* Semi-bold */
+    font-size: 1.1em;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Stronger shadow */
+    transition: all 0.3s ease; /* All properties transition */
+    border: none; /* No default border */
+    cursor: pointer;
 }
 
 .button:hover {
-    background-color: #8c0571; /* Consistent hover color */
-    transform: translateY(-2px); /* Makes it lift slightly */
+    background: linear-gradient(90deg, #a05fe0 0%, #843cc1 100%); /* Reverse gradient on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
+/* MAIN CONTENT WRAPPER */
 main {
-    padding: 30px 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #1e1e3b; /* Slightly lighter dark background for main content */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    padding: 40px 25px; /* Increased padding */
+    max-width: 1300px; /* Slightly wider max-width */
+    margin: 30px auto; /* More margin */
+    background-color: #161b22; /* Slightly lighter dark background for main content */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 0 25px rgba(0,0,0,0.7); /* Deeper shadow */
+    border: 1px solid #2f363d; /* Subtle border */
 }
 
 section {
-    margin-bottom: 50px;
+    margin-bottom: 60px; /* More space between sections */
 }
 
 h2, h3 {
-    color: #e0e0e0;
+    color: #e6edf3;
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
+    margin-bottom: 40px; /* More margin below headings */
+    font-size: 2.8em; /* Larger headings */
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(132, 60, 204, 0.3); /* Subtle purple glow */
+}
+h3 {
+    font-size: 2.2em; /* Smaller for sub-headings */
+    margin-bottom: 25px;
 }
 
-/* HERO SECTION SPECIFIC STYLES */
+/* HERO SECTION */
 #hero {
     text-align: center;
-    padding: 50px 0;
-    background-color: #2a2a4a; /* Background for the hero content area */
-    border-radius: 8px;
-    margin-bottom: 40px;
+    padding: 60px 20px; /* More padding */
+    background-color: #1e222d; /* Slightly lighter dark for hero bg */
+    border-radius: 10px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    border: 1px solid #2f363d;
+}
+
+#hero h2 {
+    font-size: 3.5em; /* Large, impactful hero heading */
+    margin-bottom: 15px;
+    color: #843cc1; /* Primary accent for hero heading */
+    text-shadow: 0 0 10px rgba(132, 60, 204, 0.7);
 }
 
 #hero p {
-    font-size: 1.2em;
-    max-width: 800px;
-    margin: 0 auto 20px auto;
+    font-size: 1.3em; /* Larger, clearer text */
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    color: #c9d1d9; /* Slightly lighter text for contrast */
 }
 
-/* FILTER CONTROLS STYLES */
+/* FILTER CONTROLS */
 .filter-controls {
     text-align: center;
-    margin-bottom: 30px;
-    background-color: #2a2a4a;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    display: flex; /* Arrange elements horizontally */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    justify-content: center; /* Center horizontally */
-    gap: 20px; /* Space between filter elements */
+    margin-bottom: 40px; /* More space below filters */
+    background-color: #1e222d; /* Slightly lighter dark */
+    padding: 25px; /* More padding */
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 3px 15px rgba(0,0,0,0.5); /* Deeper shadow */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px; /* More space between filters */
+    border: 1px solid #2f363d;
 }
 
 .filter-controls label {
-    font-weight: bold;
-    color: #a0a0ff;
-    margin-right: 10px;
-    align-self: center; /* Vertically align with dropdowns */
+    font-weight: 600; /* Semi-bold */
+    color: #843cc1; /* Accent color */
+    margin-right: 8px;
+    align-self: center;
+    font-size: 1.05em;
 }
 
-/* Styling for SELECT dropdowns */
 .filter-controls select {
-    padding: 10px 30px 10px 15px; /* Added right padding for custom arrow */
-    border-radius: 5px;
-    border: 1px solid #a0a0ff; /* Lighter accent border */
-    background-color: #3b3b6b;
-    color: #fff;
+    padding: 10px 35px 10px 15px; /* More padding for arrow */
+    border-radius: 6px; /* Slightly more rounded */
+    border: 1px solid #3b3b6b; /* Darker accent border */
+    background-color: #2a2a4a; /* Matches product cards for consistency */
+    color: #e6edf3;
     font-size: 1em;
     cursor: pointer;
-    /* Custom arrow for single selects - remove default browser styling */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    /* Inline SVG for a custom dropdown arrow (purple) */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23a0a0ff%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E');
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23843cc1%22%20d%3D%22M287%2069L146%20208%205%2069z%22%2F%3E%3C%2Fsvg%3E'); /* Eldorado purple arrow */
     background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 12px auto;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    background-position: right 12px top 50%;
+    background-size: 10px auto;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .filter-controls select:hover {
-    border-color: #fff; /* White border on hover */
+    border-color: #843cc1;
+    background-color: #3b3b6b;
 }
 
 .filter-controls select:focus {
     outline: none;
-    border-color: #fff; /* White border on focus */
-    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3); /* Soft glow */
+    border-color: #a05fe0; /* Brighter accent on focus */
+    box-shadow: 0 0 0 4px rgba(132, 60, 204, 0.4); /* Stronger glow */
 }
 
 /* PRODUCT GRID LAYOUT */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min for more columns */
+    gap: 35px; /* More gap */
+    margin-top: 30px;
 }
 
-/* INDIVIDUAL PRODUCT ITEM STYLES (ON HOMEPAGE) */
+/* INDIVIDUAL PRODUCT ITEM STYLES (HOMEPAGE CARDS) */
 .product-item {
-    background-color: #2a2a4a;
-    padding: 20px;
-    border-radius: 8px;
+    background-color: #1e222d; /* Matches hero bg */
+    padding: 25px; /* More padding */
+    border-radius: 10px; /* More rounded */
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5); /* Deeper shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border: 1px solid #2f363d;
 }
 
 .product-item:hover {
-    transform: translateY(-5px); /* Makes it lift slightly */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Slightly stronger shadow */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    background-color: #2a2a4a; /* Slight change on hover */
 }
 
 .product-item img {
     max-width: 100%;
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Cover ensures image fills the space */
-    border-radius: 4px;
-    margin-bottom: 15px;
-    border: 1px solid #444;
+    height: 180px; /* Consistent height */
+    object-fit: cover;
+    border-radius: 6px; /* More rounded corners */
+    margin-bottom: 18px;
+    border: 1px solid #3b3b6b;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .product-item h3 {
-    font-size: 1.8em;
+    font-size: 2em; /* Larger title */
     margin-top: 0;
-    margin-bottom: 10px;
-    color: #fff;
+    margin-bottom: 12px;
+    color: #843cc1; /* Accent color for title */
+    text-shadow: 0 0 3px rgba(132, 60, 204, 0.3);
 }
 
-/* Short description on product card (new class) */
 .product-item .description-short {
-    font-size: 0.95em; /* Slightly smaller font for brevity */
-    margin-bottom: 15px;
-    color: #ccc;
-    height: 3em; /* Fixed height for consistent card size */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Add ellipsis for hidden text */
-    display: -webkit-box; /* For multi-line ellipsis */
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    font-size: 0.9em; /* Concise description */
+    margin-bottom: 18px;
+    color: #b0b0b0; /* Softer text color */
+    height: 3.5em; /* Adjusted height for 2-3 lines */
+    line-height: 1.75em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Still 2 lines */
     -webkit-box-orient: vertical;
 }
 
-
-/* Account Stats on Product Cards (Homepage) */
+/* ACCOUNT STATS */
 .account-stats {
     margin-top: 15px;
-    margin-bottom: 15px; /* Space above button */
+    margin-bottom: 25px; /* More space above button */
     display: flex;
-    flex-wrap: wrap; /* Allow stats to wrap on small screens */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; /* Space between stat items */
+    gap: 8px; /* Tighter gap */
 }
 
 .account-stats span {
-    background-color: #3b3b6b; /* Darker background for stat tags */
-    color: #a0a0ff; /* Accent color for stats */
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    font-weight: bold;
-    white-space: nowrap; /* Prevent breaking across lines */
+    background-color: #2a2a4a; /* Deeper background for tags */
+    color: #e0e0e0;
+    padding: 6px 12px; /* Slightly more padding */
+    border-radius: 5px; /* More rounded */
+    font-size: 0.8em; /* Slightly smaller font */
+    font-weight: 600; /* Semi-bold */
+    white-space: nowrap;
+    border: 1px solid #3b3b6b; /* Subtle border */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Inner shadow for depth */
 }
 
-/* NO RESULTS MESSAGE STYLES */
+/* NO RESULTS MESSAGE */
 #no-results-message {
     text-align: center;
-    padding: 40px 20px;
-    background-color: #2a2a4a;
+    padding: 50px 20px; /* More padding */
+    background-color: #1e222d;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    margin-top: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    margin-top: 40px;
+    border: 1px solid #2f363d;
 }
 
 #no-results-message h3 {
-    color: #e0e0e0;
-    margin-bottom: 15px;
-    font-size: 1.8em;
+    color: #e6edf3;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-shadow: none; /* No glow on this text */
 }
 
 #no-results-message p {
-    color: #ccc;
-    margin-bottom: 25px;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+    font-size: 1.1em;
 }
 
-/* Style for the Clear Filters button (reusing .button style) */
 #no-results-message .button {
-    background-color: #6a0571; /* Match primary button color */
-    padding: 12px 30px;
+    background: linear-gradient(90deg, #843cc1 0%, #a05fe0 100%); /* Match main button style */
+    padding: 14px 30px;
 }
 
-#no-results-message .button:hover {
-    background-color: #8c0571;
-}
-
-/* PRODUCT DETAIL PAGE SPECIFIC STYLES */
+/* PRODUCT DETAIL PAGE */
 .product-detail {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    padding: 30px;
-    background-color: #2a2a4a;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    padding: 40px; /* More padding */
+    background-color: #1e222d;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+    border: 1px solid #2f363d;
 }
 
 .product-detail img {
-    max-width: 100%;
+    max-width: 90%; /* Slightly smaller img to add breathing room */
     height: auto;
-    max-height: 400px;
+    max-height: 450px; /* Slightly taller */
     object-fit: contain;
     border-radius: 8px;
-    border: 1px solid #444;
+    border: 1px solid #3b3b6b;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .product-detail h2 {
-    font-size: 2.8em;
-    margin-bottom: 15px;
-    color: #fff;
+    font-size: 3.2em; /* Larger product title */
+    margin-bottom: 18px;
+    color: #843cc1; /* Accent color */
+    text-shadow: 0 0 5px rgba(132, 60, 204, 0.4);
 }
 
 .product-detail .price-placeholder {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #a0a0ff;
-    margin-bottom: 20px;
+    font-size: 1.8em; /* Larger price text */
+    font-weight: 700;
+    color: #a05fe0; /* Brighter purple */
+    margin-bottom: 25px;
 }
 
 .product-detail p {
     font-size: 1.1em;
-    max-width: 800px;
+    max-width: 900px; /* Wider text area */
     text-align: center;
-    color: #e0e0e0;
+    color: #c9d1d9; /* Softer text */
+    line-height: 1.8;
 }
 
 .product-detail ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
-    text-align: left; /* Align list items left */
-    max-width: 600px;
+    margin: 25px 0;
+    text-align: left;
+    max-width: 700px; /* Wider list */
     width: 100%;
 }
 
 .product-detail ul li {
-    background-color: #3b3b6b;
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-    color: #fff;
+    background-color: #2a2a4a;
+    padding: 12px 20px; /* More padding */
+    margin-bottom: 10px; /* More space between items */
+    border-radius: 6px;
+    color: #e6edf3;
     display: flex;
     align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 1px solid #3b3b6b;
 }
 
 .product-detail ul li::before {
-    content: '✅'; /* Checkmark icon */
-    margin-right: 10px;
+    content: '✓'; /* Simple checkmark, looks cleaner than emoji */
+    color: #00ff00; /* Green checkmark */
+    font-weight: bold;
+    margin-right: 12px;
+    font-size: 1.2em;
 }
 
-/* FORM STYLES (for product detail page forms) */
+/* FORM STYLES */
 form {
-    max-width: 500px;
-    width: 100%; /* Important for mobile centering */
-    margin: 30px auto; /* Centered and space above */
-    padding: 25px;
-    background-color: #1e1e3b;
-    border: 1px solid #444;
+    max-width: 550px; /* Slightly wider form */
+    width: 100%;
+    margin: 40px auto; /* More margin */
+    padding: 30px; /* More padding */
+    background-color: #1e222d;
+    border: 1px solid #2f363d;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
 }
 
 form h3 {
     text-align: center;
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 2em;
+    color: #843cc1; /* Accent color */
+    margin-bottom: 25px;
+    font-size: 2.5em;
 }
 
 form label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #ccc;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #c9d1d9; /* Softer label color */
+    font-size: 1.05em;
 }
 
 form input[type="text"],
 form input[type="tel"],
 form textarea {
-    width: calc(100% - 20px); /* Adjust for padding */
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #3b3b6b;
-    border: 1px solid #6a0571; /* Purple border */
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1em;
+    width: calc(100% - 24px); /* Account for padding + border */
+    padding: 12px; /* More padding */
+    margin-bottom: 25px;
+    background-color: #2a2a4a;
+    border: 1px solid #3b3b6b;
+    border-radius: 6px;
+    color: #e6edf3;
+    font-size: 1.05em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form input[type="text"]:focus,
 form input[type="tel"]:focus,
 form textarea:focus {
     outline: none;
-    border-color: #a0a0ff; /* Light purple on focus */
-    box-shadow: 0 0 0 3px rgba(160, 160, 255, 0.3);
+    border-color: #a05fe0;
+    box-shadow: 0 0 0 4px rgba(132, 60, 204, 0.4);
 }
 
 form button[type="submit"] {
-    background-color: #008000; /* Green submit button */
+    background: linear-gradient(90deg, #00b347 0%, #00e05e 100%); /* Eldorado green for submit */
     color: white;
-    padding: 12px 25px;
+    padding: 14px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.1em;
-    font-weight: bold;
-    display: block; /* Make button full width if needed, or center with margin auto */
+    font-weight: 600;
+    display: block;
     margin: 0 auto;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
 }
 
 form button[type="submit"]:hover {
-    background-color: #006400;
-    transform: translateY(-2px);
+    background: linear-gradient(90deg, #00e05e 0%, #00b347 100%); /* Reverse gradient on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
-/* FOOTER STYLES */
+/* FOOTER */
 footer {
     text-align: center;
-    padding: 25px;
-    background-color: #0f0f2b;
-    color: #aaa;
-    margin-top: 40px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+    padding: 30px; /* More padding */
+    background-color: #0d1117; /* Match body bg */
+    color: #7b8591; /* Softer footer text */
+    margin-top: 50px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5); /* Stronger top shadow */
 }
 
 /* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 768px) {
-    /* Header & Navigation */
+@media (max-width: 1024px) { /* Adjustments for larger tablets */
+    main {
+        padding: 30px 20px;
+    }
+    .filter-controls {
+        gap: 15px;
+        padding: 20px;
+    }
+    .product-grid {
+        gap: 25px;
+    }
+    .product-item {
+        padding: 20px;
+    }
+    .product-detail {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) { /* Common tablet/mobile breakpoint */
     header h1 {
         font-size: 1.8em;
     }
@@ -436,145 +523,169 @@ footer {
         margin: 8px 0;
         font-size: 0.95em;
     }
+    nav a::after {
+        display: none; /* Hide underline on small screens */
+    }
+    nav a:hover {
+        transform: none; /* No lift on mobile nav */
+    }
 
-    /* Main Content Area */
     main {
-        margin: 10px auto;
+        margin: 15px auto;
         padding: 15px;
     }
 
-    /* Hero Section */
-    #hero {
-        padding: 30px 10px;
+    h2, h3 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
     }
-    #hero p {
-        font-size: 1em;
-        padding: 0 10px;
-    }
-    .button {
-        padding: 10px 20px;
-        font-size: 0.9em;
+    h3 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
     }
 
-    /* FILTER CONTROLS */
+    #hero {
+        padding: 40px 15px;
+    }
+    #hero h2 {
+        font-size: 2.8em;
+    }
+    #hero p {
+        font-size: 1.1em;
+    }
+    .button {
+        padding: 12px 25px;
+        font-size: 1em;
+        transform: none; /* No lift on mobile buttons */
+    }
+    .button:hover {
+        transform: none; /* No lift on mobile buttons */
+    }
+
     .filter-controls {
         flex-direction: column;
         align-items: center;
         gap: 15px;
+        padding: 15px;
     }
     .filter-controls label,
     .filter-controls select {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px; /* Give a bit more width on mobile */
         margin-right: 0;
     }
+    .filter-controls select {
+        padding: 10px 25px 10px 10px; /* Adjust padding for smaller width */
+    }
 
-    /* Product Grid (Homepage) */
+
     .product-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
     .product-item {
         padding: 15px;
+        transform: none; /* No lift on mobile cards */
+    }
+    .product-item:hover {
+        transform: none; /* No lift on mobile cards */
     }
     .product-item img {
-        height: 180px;
+        height: 160px;
     }
     .product-item h3 {
-        font-size: 1.6em;
+        font-size: 1.5em;
     }
-    .product-item .description-short,
-    .product-item p { /* Added p to catch other paragraphs if any */
-        font-size: 0.85em; /* Smaller on mobile for brevity */
-        height: auto; /* Remove fixed height for mobile */
-        -webkit-line-clamp: unset; /* Remove line clamp on mobile */
+    .product-item .description-short {
+        font-size: 0.85em;
+        height: auto; /* Allow full text on mobile */
+        -webkit-line-clamp: unset;
     }
     .account-stats {
-        flex-direction: column; /* Stack stats vertically on mobile */
+        flex-direction: column;
         gap: 5px;
     }
     .account-stats span {
-        font-size: 0.8em; /* Smaller font for stats */
+        font-size: 0.8em;
+        padding: 4px 8px;
     }
 
-    /* NO RESULTS MESSAGE */
     #no-results-message {
         padding: 30px 15px;
     }
     #no-results-message h3 {
-        font-size: 1.6em;
+        font-size: 1.8em;
+    }
+    #no-results-message p {
+        font-size: 1em;
     }
 
-    /* Product Detail Page */
     .product-detail {
-        flex-direction: column;
-        padding: 20px;
+        padding: 25px;
         gap: 20px;
     }
     .product-detail img {
-        max-height: 250px;
+        max-height: 200px;
     }
     .product-detail h2 {
-        font-size: 2.2em;
-        word-break: break-word;
-        padding: 0 10px;
+        font-size: 2.5em;
     }
     .product-detail .price-placeholder {
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
     .product-detail p {
         font-size: 1em;
-        padding: 0 10px;
     }
     .product-detail ul {
-        width: calc(100% - 20px);
+        width: 100%;
         padding: 0 10px;
     }
     .product-detail ul li {
-        padding: 8px 12px;
-        font-size: 0.95em;
+        padding: 10px 15px;
+        font-size: 0.9em;
     }
 
-    /* Form Styles (Mobile specific) */
     form {
-        width: 100%; /* Force form to take full width of its container */
-        max-width: 400px; /* Limit its size so it doesn't get too wide on tablets */
-        padding: 15px; /* Reduce form padding */
-        box-sizing: border-box; /* Include padding in width calculation */
-        margin-left: auto; /* Re-apply auto margins to ensure centering */
-        margin-right: auto;
+        max-width: 100%; /* Ensure it spans fully on small screens */
+        padding: 20px;
     }
     form input[type="text"],
     form input[type="tel"],
     form textarea {
-        width: calc(100% - 20px);
-        font-size: 0.95em;
+        width: calc(100% - 24px); /* Keep box-sizing in mind with padding */
+        padding: 10px;
+        font-size: 0.9em;
     }
     form button[type="submit"] {
-        padding: 10px 20px;
+        padding: 12px 25px;
         font-size: 1em;
     }
-
-    /* Footer */
     footer {
-        padding: 15px;
-        font-size: 0.9em;
+        padding: 20px;
+        font-size: 0.85em;
     }
 }
 
-/* Optional: Additional breakpoint for very small phones (e.g., iPhone 5/SE, smaller Androids) */
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* Smaller phones */
     header h1 {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
     nav a {
-        font-size: 0.85em;
-    }
-    .button {
-        padding: 8px 15px;
         font-size: 0.8em;
+    }
+    #hero h2 {
+        font-size: 2em;
+    }
+    #hero p {
+        font-size: 0.9em;
+    }
+    h2, h3 {
+        font-size: 1.8em;
     }
     .product-detail h2 {
         font-size: 1.8em;
+    }
+    .product-detail .price-placeholder {
+        font-size: 1.2em;
     }
 }
