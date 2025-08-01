@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siege Sellify - Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <h1>Siege Sellify</h1>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="/logout" class="logout-btn">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <div class="profile-container">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img id="user-avatar" src="" alt="User Avatar">
+          </div>
+          <div class="profile-info">
+            <h2 id="user-name">Loading...</h2>
+            <p id="user-email">Loading...</p>
+            <p class="member-since">Member since: <span id="member-date">Loading...</span></p>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <div class="section">
+            <h3>Purchase History</h3>
+            <div id="purchase-history">
+              <p>Loading purchase history...</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Account Stats</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-number" id="total-purchases">0</span>
+                <span class="stat-label">Total Purchases</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="total-spent">$0</span>
+                <span class="stat-label">Total Spent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Siege Sellify. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Load user data
+    async function loadUserData() {
+      try {
+        const response = await fetch('/api/user');
+        const data = await response.json();
+        const user = data.user;
+
+        document.getElementById('user-name').textContent = user.name;
+        document.getElementById('user-email').textContent = user.email;
+        document.getElementById('user-avatar').src = user.picture;
+        
+        const memberDate = new Date(user.createdAt || Date.now()).toLocaleDateString();
+        document.getElementById('member-date').textContent = memberDate;
+
+        // Load purchase history
+        const purchaseHistory = document.getElementById('purchase-history');
+        if (user.purchaseHistory && user.purchaseHistory.length > 0) {
+          purchaseHistory.innerHTML = user.purchaseHistory.map(purchase => `
+            <div class="purchase-item">
+              <div class="purchase-info">
+                <h4>${purchase.productName}</h4>
+                <p>Product ID: ${purchase.productId}</p>
+                <p>Purchase Date: ${new Date(purchase.purchaseDate).toLocaleDateString()}</p>
+              </div>
+              <div class="purchase-price">$${purchase.price}</div>
+            </div>
+          `).join('');
+
+          // Update stats
+          document.getElementById('total-purchases').textContent = user.purchaseHistory.length;
+          const totalSpent = user.purchaseHistory.reduce((sum, purchase) => sum + purchase.price, 0);
+          document.getElementById('total-spent').textContent = `$${totalSpent}`;
+        } else {
+          purchaseHistory.innerHTML = '<p>No purchases yet. <a href="index.html">Browse our accounts</a></p>';
+        }
+      } catch (error) {
+        console.error('Error loading user data:', error);
+      }
+    }
+
+    loadUserData();
+  </script>
+</body>
+</html>
