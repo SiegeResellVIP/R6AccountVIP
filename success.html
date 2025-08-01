@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Siege Resell VIP – Thank You</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Siege Resell VIP</h1>
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+  <main>
+    <section class="product-detail">
+      <h2>Thank you for your purchase!</h2>
+      <p>Your login credentials are below. Change them as soon as you can.</p>
+      <div id="credentials">
+        <p>Loading…</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Siege Resell VIP</p>
+  </footer>
+
+  <script>
+    async function loadCreds() {
+      const params = new URLSearchParams(location.search);
+      const sid = params.get('session_id');
+      if (!sid) {
+        document.getElementById('credentials').innerText =
+          'No session_id – cannot retrieve credentials.';
+        return;
+      }
+      const res = await fetch(`/.netlify/functions/payment-success?session_id=${sid}`);
+      const data = await res.json();
+      if (!res.ok) {
+        document.getElementById('credentials').innerText =
+          data.error || 'Error fetching credentials';
+        return;
+      }
+      document.getElementById('credentials').innerHTML = `
+        <p><strong>Username:</strong> ${data.username}</p>
+        <p><strong>Password:</strong> ${data.password}</p>
+      `;
+    }
+    document.addEventListener('DOMContentLoaded', loadCreds);
+  </script>
+</body>
+</html>
