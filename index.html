@@ -18,8 +18,9 @@
       </div>
       <nav aria-label="Main navigation">
         <a href="index.html" class="active">Accounts</a>
-        <a href="/profile" class="profile-link">Profile</a>
-        <a href="/login" class="login-link">Login</a>
+        <a href="/profile" class="profile-link" id="profile-link" style="display: none;">Profile</a>
+        <a href="/login" class="login-link" id="login-link">Login</a>
+        <a href="/logout" class="logout-link" id="logout-link" style="display: none;">Logout</a>
       </nav>
     </div>
   </header>
@@ -395,5 +396,32 @@
 
   <script src="js/common.js" defer></script>
   <script src="js/products-filter.js" defer></script>
+  <script>
+    // Check authentication status
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch('/api/auth-status');
+        const data = await response.json();
+        
+        const profileLink = document.getElementById('profile-link');
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        
+        if (data.authenticated) {
+          profileLink.style.display = 'inline';
+          loginLink.style.display = 'none';
+          logoutLink.style.display = 'inline';
+        } else {
+          profileLink.style.display = 'none';
+          loginLink.style.display = 'inline';
+          logoutLink.style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error checking auth status:', error);
+      }
+    }
+    
+    checkAuthStatus();
+  </script>
 </body>
 </html>

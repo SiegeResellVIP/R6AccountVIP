@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const path = require('path');
 
 const app = express();
@@ -18,9 +19,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/siege-sel
 // User schema
 const userSchema = new mongoose.Schema({
   googleId: String,
-  email: String,
+  email: { type: String, required: true, unique: true },
   name: String,
+  password: String,
   picture: String,
+  authType: { type: String, enum: ['google', 'local'], default: 'local' },
   purchaseHistory: [{
     productId: String,
     productName: String,
@@ -49,21 +52,33 @@ app.use(passport.session());
 
 // Passport configuration
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  clientID: process.env.GOOGLE_CLIENT_ID || 'demo-client-id',
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'demo-client-secret',
   callbackURL: "/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   try {
-    let user = await User.findOne({ googleId: profile.id });
+    let user = await User.findOne({ 
+      $or: [
+        { googleId: profile.id },
+        { email: profile.emails[0].value }
+      ]
+    });
     
     if (user) {
+      if (!user.googleId) {
+        user.googleId = profile.id;
+        user.authType = 'google';
+        user.picture = profile.photos[0].value;
+        await user.save();
+      }
       return done(null, user);
     } else {
       user = new User({
         googleId: profile.id,
         email: profile.emails[0].value,
         name: profile.displayName,
-        picture: profile.photos[0].value
+        picture: profile.photos[0].value,
+        authType: 'google'
       });
       await user.save();
       return done(null, user);
@@ -103,17 +118,24 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, 'signup.html'));
+});
+
 app.get('/profile', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'profile.html'));
 });
 
 // Google OAuth routes
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+app.get('/auth/google', (req, res, next) => {
+  if (!process.env.GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID === 'demo-client-id') {
+    return res.redirect('/login?error=google-not-configured');
+  }
+  passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+});
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/login?error=google-auth-failed' }),
   (req, res) => {
     res.redirect('/profile');
   }
@@ -129,6 +151,10 @@ app.get('/logout', (req, res) => {
 });
 
 // API routes
+app.get('/api/auth-status', (req, res) => {
+  res.json({ authenticated: req.isAuthenticated() });
+});
+
 app.get('/api/user', isAuthenticated, (req, res) => {
   res.json({
     user: {
@@ -139,6 +165,65 @@ app.get('/api/user', isAuthenticated, (req, res) => {
       purchaseHistory: req.user.purchaseHistory
     }
   });
+});
+
+// Manual signup
+app.post('/auth/signup', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.json({ success: false, message: 'User already exists with this email' });
+    }
+    
+    // Hash password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+    // Create new user
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      authType: 'local'
+    });
+    
+    await user.save();
+    res.json({ success: true, message: 'Account created successfully' });
+  } catch (error) {
+    console.error('Signup error:', error);
+    res.json({ success: false, message: 'Error creating account' });
+  }
+});
+
+// Manual login
+app.post('/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    const user = await User.findOne({ email });
+    if (!user || !user.password) {
+      return res.json({ success: false, message: 'Invalid email or password' });
+    }
+    
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.json({ success: false, message: 'Invalid email or password' });
+    }
+    
+    // Login user
+    req.login(user, (err) => {
+      if (err) {
+        return res.json({ success: false, message: 'Error logging in' });
+      }
+      res.json({ success: true, message: 'Login successful' });
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.json({ success: false, message: 'Error logging in' });
+  }
 });
 
 app.post('/api/purchase', isAuthenticated, async (req, res) => {
