@@ -61,6 +61,8 @@
           <p>Don't have an account? <a href="/signup" class="signup-link">Sign up here</a></p>
         </div>
 
+        <div id="url-error" class="error-message" style="display: none;"></div>
+
         <div class="login-info">
           <h3>Why Sign In?</h3>
           <ul>
@@ -79,6 +81,21 @@
   </footer>
 
   <script>
+    // Check for URL errors
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlError = document.getElementById('url-error');
+    
+    if (urlParams.get('error') === 'database-not-available') {
+      urlError.textContent = 'Database not available. Please contact administrator to set up MongoDB.';
+      urlError.style.display = 'block';
+    } else if (urlParams.get('error') === 'google-not-configured') {
+      urlError.textContent = 'Google OAuth not configured. Please use manual login or contact administrator.';
+      urlError.style.display = 'block';
+    } else if (urlParams.get('error') === 'google-auth-failed') {
+      urlError.textContent = 'Google authentication failed. Please try again or use manual login.';
+      urlError.style.display = 'block';
+    }
+
     document.getElementById('manual-login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       

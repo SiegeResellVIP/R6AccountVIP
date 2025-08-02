@@ -11,10 +11,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection (using MongoDB Atlas or local)
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/siege-sellify', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/siege-sellify');
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.log('MongoDB connection failed, running in demo mode:', error.message);
+    // Continue running without database for demo purposes
+  }
+};
+
+connectDB();
 
 // User schema
 const userSchema = new mongoose.Schema({
@@ -101,6 +108,17 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+// Database check middleware
+const checkDatabase = (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.json({ 
+      success: false, 
+      message: 'Database not available. Please set up MongoDB connection in environment variables.' 
+    });
+  }
+  next();
+};
+
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -128,6 +146,9 @@ app.get('/profile', isAuthenticated, (req, res) => {
 
 // Google OAuth routes
 app.get('/auth/google', (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.redirect('/login?error=database-not-available');
+  }
   if (!process.env.GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID === 'demo-client-id') {
     return res.redirect('/login?error=google-not-configured');
   }
@@ -168,7 +189,7 @@ app.get('/api/user', isAuthenticated, (req, res) => {
 });
 
 // Manual signup
-app.post('/auth/signup', async (req, res) => {
+app.post('/auth/signup', checkDatabase, async (req, res) => {
   try {
     const { name, email, password } = req.body;
     
@@ -199,7 +220,7 @@ app.post('/auth/signup', async (req, res) => {
 });
 
 // Manual login
-app.post('/auth/login', async (req, res) => {
+app.post('/auth/login', checkDatabase, async (req, res) => {
   try {
     const { email, password } = req.body;
     

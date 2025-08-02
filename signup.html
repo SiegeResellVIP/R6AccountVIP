@@ -70,6 +70,8 @@
         <div class="signup-prompt">
           <p>Already have an account? <a href="/login" class="signup-link">Sign in here</a></p>
         </div>
+
+        <div id="url-error" class="error-message" style="display: none;"></div>
       </div>
     </section>
   </main>
@@ -79,6 +81,15 @@
   </footer>
 
   <script>
+    // Check for URL errors
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlError = document.getElementById('url-error');
+    
+    if (urlParams.get('error') === 'database-not-available') {
+      urlError.textContent = 'Database not available. Please contact administrator to set up MongoDB.';
+      urlError.style.display = 'block';
+    }
+
     document.getElementById('signup-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       
